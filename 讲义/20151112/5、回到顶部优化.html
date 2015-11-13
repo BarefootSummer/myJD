@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 1000%;
+            background: #ffeedd;
+            background: -webkit-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+            background: -moz-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+            background: -ms-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+            background: -o-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+            background: linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+        }
+
+        #div1 {
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            width: 80%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #008000;
+            color: #fff;
+        }
+
+        #goTo {
+            display: none;
+            position: fixed;
+            right: 5px;
+            bottom: 15px;
+            width: 52px;
+            height: 52px;
+            background: #fff;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px 0 #ccc;
+        }
+
+        #goTo em {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -17px 0 0 -17px;
+            width: 34px;
+            height: 34px;
+            background: url("img/bg.png") no-repeat;
+            background-position: 0 -34px;
+        }
+    </style>
+</head>
+<body>
+<div id="goTo"><em></em></div>
+
+<script type="text/javascript">
+    function getWin(attr) {
+        return document.documentElement[attr] || document.body[attr];
+    }
+    var goTo = document.getElementById("goTo");
+
+    //获取当前浏览器一屏幕的高度
+    var curH = getWin("clientHeight");
+
+    //当我们页面滚动的时候,我们获取当前浏览器卷去的高度,如果高度大于curH,让我们的goTo显示,反之让goTo隐藏~~
+    function scrollMove() {
+        var curT = getWin("scrollTop");
+        goTo.style.display = curT >= curH ? "block" : "none";
+    }
+    window.onscroll = scrollMove;
+
+    //给我们的goTo绑定点击事件,当点击的时候让页面的scrollTop从当前位置变为0
+    goTo.onclick = function () {
+        //为了防止用户的重复点击,我们点击的时候让当前的按钮隐藏
+        this.style.display = "none";
+        //但是我们发现,触发了onscroll事件,又从新的计算,从新的让我们的按钮显示
+        window.onscroll = null;
+
+        //实现动画逐步运动到开始的位置
+        var tarT = getWin("scrollTop") - 0;
+        var step = (tarT / 500) * 10;
+        var timer = window.setInterval(function () {
+            document.documentElement.scrollTop -= step;
+            document.body.scrollTop -= step;
+            if (getWin("scrollTop") <= 0) {
+                window.onscroll = scrollMove;
+                window.clearInterval(timer);
+            }
+        }, 10);
+    };
+</script>
+</body>
+</html>
