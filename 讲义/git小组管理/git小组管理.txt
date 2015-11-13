@@ -1,0 +1,143 @@
+组长：
+1、fork老师的仓库地址:https://github.com/zhufengpeixun/JavaScript-201507
+2、设置自己的组员：settings -> collaborators -> [Search by username, full name or email address] 根据组员的账号一个个的添加
+
+组员:
+1、打开自己的github,可以看到一个项目,项目的名称是: "组长的账号名/JavaScript-201507"
+
+
+
+所有人平时的操作
+前提：所有人克隆一份仓库的内容
+     找到任意磁盘，右键，git bash hear --> $ git clone 项目小组的仓库地址
+
+1、平时提交作业
+  1)先到项目小组的仓库进行拉取最新(一定要记住必须要做这样一步操作): $ git pull origin master
+    如果出现小黑框,我们先按ESC这个键->输入":wq"->按下一回车键,保存并退出
+
+  2)进入到项目中"JavaScript-201507"->"作业"->"找到自己小组的文件夹"->"找到自己名字对应的文件夹"->把作业文件放进来(以后提交的作业都这样来处理:新建一个文件夹命名为"第N周作业")
+
+  3)把作业先添加到缓存区：$ git add -A
+
+  4)把作业提交到历史区: $ git commit -m"xxx的第xxx周作业"
+
+  5)把自己的作业提交到本小组的git仓库中：$ git push origin master  ->输入自己的github账号的用户名和密码
+
+2、平时提交练习的代码
+  1)我们把平时自己练习的代码,都要提交到github上去,要求：每天练习结束,都要提交一下
+  2)先到项目小组的仓库进行拉取最新(一定要记住必须要做这样一步操作): $ git pull origin master
+    如果出现小黑框,我们先按ESC这个键->输入":wq"->按下一回车键,保存并退出
+  3)进入到项目中"JavaScript-201507"->"练习"->"找到自己小组的文件夹"->"找到自己名字对应的文件夹"->把练习文件放进来(命名都按照当天的时间来命名)
+  4)把作业先添加到缓存区：$ git add -A
+  5)把作业提交到历史区: $ git commit -m"xxx的第xxx周作业"
+  6)把自己的作业提交到本小组的git仓库中：$ git push origin master  ->输入自己的github账号的用户名和密码
+
+
+3、可能出现的问题：
+  1)如果是一个空的文件夹或者是一个空的文件是上传不上去的
+  2)如果出现这两个信息说明，当前本地的git还没有注册
+    git config --global user.email "...."
+    git config --global user.name "...."
+    解决办法:
+    $ git config --global user.email "你的邮箱(建议和你们的github注册邮箱保持一致)"
+    $ git config --global user.name "你的名字(建议和github用户名保持一致)"
+  3)我们可以拉取小组最新的项目源码查看其它人的作业和练习，但是我们不要去修改，每一次提交或者修改自己的作业或者练习的文件,都找到自己名字的文件夹,并在里面操作
+  4)我们上传的文件保持UTF-8编码格式，对于.txt文件如何的修改: 用记事本打开当前的文件-->另存为-->在保存按钮的旁边选择编码格式为utf-8-->保存
+
+[*****]这里我们一定要记住，在每一次提交的时候都要先通过 $ git pull origin master 拉取最新的文件(平时想看别人练习的,都可以拉取下来看)
+
+
+作为组长不是那么轻松的
+1、每周三或者周四提交上一周预留的作业
+2、每周二、周四、每周日 提交本小组本周的练习内容
+每一个小组想看其他组的练习内容，可以随时获取最新
+
+如何的提交给老师和如何的获取最新呢
+[在github界面中操作]
+1、发起一个pull request --> 2、new pull request -->3、比较(左边是珠峰,右边是自己的话,是把自己的代码提交给珠峰;左边是自己,右边是珠峰,是把珠峰的代码进行同步)-->4、点击create pull request-->编写title和描述：title要求描述清楚(例如：全日制第一组提交第三周的作业、全日制第二组拉取最新的文件....) -->提交文件给珠峰需要等待珠峰的审核,同步珠峰最新的代码只需要自己审核
+
+2、我们可以使用git命令，来进行更新老师的文件(前提是你已经fork老师的代码了)
+[组长自己把老师的代码拉取到自己的本地了]
+$ git remote add 名字(不要在叫origin了) 别人仓库git地址 (在本地操作一次后,以后就不需要执行了,想看有没有 $ git remote -v)
+$ git remote update 名字
+$ git pull 名字 master
+
+[在把自己本地的代码添加到本组的仓库中]
+$ git pull origin master
+$ git add -A
+$ git commit -m""
+$ git push origin master
+
+
+
+
+
+
+
+常用的git操作命令
+1、初始化一个仓库  -> git init
+     $ cd /c  切换工作目录 change directory
+     $ pwd   输出当前工作目录 print working directory
+     $ ls        显示当前目录下面的文件
+     $ ls -a    显示当前目录下面的文件(包含隐藏文件)
+
+2、把本地文件添加到暂存区
+      git add example.html
+      git add -A  把工作区所有的变化全部提交到暂存区
+
+3、把暂存区的内容添加到历史区
+      git commit -m"提交说明"
+      $ git log 查看历史
+      $ git status 查看工作区和暂存区的区别,查看暂存区和历史区的区别
+      红色表示工作区和暂存区的区别
+      绿色表示暂存区和历史区的区别
+
+4、添加远程仓库,此命令只需要执行一次
+     git remote add origin  git地址
+
+     git remote -v 查看远程仓库的详细信息
+     git remote rm 名字 删除远程仓库
+
+     把fork别人的仓库最新文件更新到本地
+     git remote add 名字  别人仓库git地址
+     git remote update 名字
+     git pull 名字 master  /  git rebase 名字 master  (不会变更到工作区)
+
+5、从远程服务器上拉取代码
+     git pull origin master
+
+     下载别人的仓库
+     git clone git地址
+
+6、把本地的代码推送到远程服服务器上.
+      git push origin master
+
+1)git reset --hard HEAD 当你本地做了修改,可以用这个命令取消掉所有的修改
+2)推送的时候本地至少有一个提交
+3)如果说远程仓库地址错了 git remote rm origin
+4)每次修改都需要 add commit push
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
