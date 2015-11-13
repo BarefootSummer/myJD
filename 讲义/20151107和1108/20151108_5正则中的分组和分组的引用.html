@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var s2="现在的时间是2015-11-08 10:49:33，这个点已经起床啦";
+    var reg=/(\d{4})-([1-9]|1[0-2]|0[1-9])-(\d{2}) +(\d{2}):(\d{2}):(\d{2})/;
+    //每一个括号里的部分，都可以看成一个子正则，也叫分组
+    var a=s2.match(reg);
+    console.log(a);
+    if(reg.test(s2)){
+        RegExp.$1
+        RegExp.$2;
+    }
+//就是说match和exec方法在正则不加修正符g的前提，功能一样。一但加g，match就不会去理会分组的内容了
+    var reg1=/(\d)(\d)/g;
+    var reg2=/(\d)(\d)/;
+    var str="12abc45ii879dkdd223";
+    var a1=str.match(reg1);
+    var a2=str.match(reg2)
+    //match在运行时，如果正则加g，则在捕获的时候，忽略分组
+    //分组的引用
+    var reg=/(\d)\d\1/;//后边的\1表示是：这儿的内容是对第一个分组内容的内容，也就是说这儿出现的内容要和第一个分组出现的必须一样
+
+    //匹配不捕获,钍对于分组来说的。只让括号里的正则来验证字符，但不把把这一部分捕获出来。
+    var reg2=/(?:\d)(?:\d)/;
+    var str="12abc45ii879dkdd223";
+    console.log(reg2.exec(str))
+
+    var str="777777888888866666666633333333";
+    //去掉这个字符中的重复数字
+    var reg=/(\d)\1+/g;
+    reg=/\d+/
+    reg=/1+/
+
+    str=str.replace(reg,"$1");//表示在str这个字符中，把用reg匹配到的内容，用reg这个正则的第一个分组中捕获到的内容来替换掉
+    //当replace在执行替换的时候，匹配和替换的工作会执行四遍，
+    //alert(str);
+
+    var str ="ab";
+    var reg=/(\w)(\w)/;
+    str=str.replace(reg,"$2$1");
+
+    var str="abcdefgh";
+    var reg=/(\w)(\w)/g;
+    str=str.replace(reg,"$2$1");
+
+    //正向预查和负向预查：带条件的正则表达式
+    var str="111112009zhufengpeixun";
+    var str2="111112009myzhufengpeixun";
+    //要求：把连续数字的找到，但是有一个前提条件：它后边要的结尾部分要是zhufengpeixun这个字符串。
+    var reg=/\d+(?=zhufengpeixun$)/;//正向预查就是写在括号里的(?=正则表达式格式的条件)）
+
+    //alert(reg.exec(str2));
+    alert(reg.exec(str));
+
+    var str3="88zhufengpeixun8888888"
+    //var reg3=/(?=88)\w+/;
+    var reg3=/(?=zhufengpeixun)\d+/
+    alert(reg3.exec(str3));//说明这种带条件的正则，条件出现在左则的时候要慎重
+
+    //负向预查
+
+    var str="111112009zhufengpeixun";
+    var reg1=/\d{9}(?!zhufengpeixun$)/;//括号里的?!表示不能满意右则的条件.这个表示：右侧不能以zhufengpeixun结尾才算匹配合格
+    //reg1和str就不匹配
+
+    var reg2=/\d+(?!zhufengpeixun$)/;//要注意这个正则和上一个正则的不同
+    //reg2是和str匹配
+    reg2.exec(str)
+
+
+
+</script>

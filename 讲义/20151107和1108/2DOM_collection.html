@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        var oLis1=document.getElementsByTagName("li");
+        alert(oLis1.length);
+    </script>
+</head>
+<body>
+    <ul id="ul1">
+        <li>78</li>
+        <li>67</li>
+        <li>88</li>
+        <li>91</li>
+        <li>66</li>
+        <li>62</li>
+        <li>99</li>
+        <li>64</li>
+        <li>83</li>
+        <li>77</li>
+    </ul>
+</body>
+</html>
+<script>
+    var oLis2=document.getElementsByTagName("li");
+    alert(oLis2.length);
+    alert(oLis1.length)
+    alert(oLis1==oLis2);
+    var obj1={};
+    var obj2={};
+
+    //node list的特性:lived,活的，
+    //node list的特性2:它是随元素增加或减少动态变化的。但是不直接修改集合本身。
+    //node list里元素的顺序严格的按着网页上元素的顺序排列。如果网页上的元素顺序发生改变了，则这个集合也会自动改变
+
+    oLi1=oLis1.item(0);
+    oLi1.parentNode.removeChild(oLi1);
+    oLis1.length//自动少一个
+    oLis1.item(oLis1.length-1).parentNode.insertBefore(oLis1.item(oLis1.length-1),oLis1.item(0));
+    for(var i=0;i <10;i++){
+        var ele=document.createElement("li");
+        oLis1.item(0).parentNode.appendChild(ele);
+
+    }
+    oLis1.length;
+
+</script>

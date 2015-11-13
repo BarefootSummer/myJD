@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul	>
+    <!-- 注释 --><li>1</li><div>div</div><p>p</p>
+    <a id="a1" href="http://www.zhufengpeixun.cn">珠峰培训</a>
+</ul>
+<student></student>
+</body>
+</html>
+<script>
+    var oLi=document.getElementsByTagName("li").item(0);
+    //HTMLLIElement
+    var oDiv=oLi.nextElementSibling;
+    //HTMLDivElement
+    var oP=oDiv.nextElementSibling;
+    //HTMLParagraphElement
+    document.documentElement;//HTMLDocumentElement
+    document.body;//HTMLBodyElement
+    document;//HTMLDocument
+    var oText=oP.nextSibling;
+    //Text
+    oComment=oLi.previousSibling;
+    //Comment
+    //问题1：如何知道一个实例对应的类
+    //问题2：如何知道一个实例对应的这个类的父类和所有祖先类
+    //问题3：各个HTML标签元素对应的类有什么特点  HTML[标签对应的英文名]Element
+
+    //问题4：可以通过这个特征来判断一个对象（实例）是不是HTML元素
+    //toString方法那点事:相当于人的名片，就是对这个人的文本性质的描述
+    //toString一般情况下会输出"[object 对应的构造函数名]"
+    //如果是HTML元素，则会输出 [object HTML[tagName]Element],这个原则只适用于标准浏览器
+
+    function isEle(obj){
+        var reg=/\[object HTML[A-Z]\w*Element\]/;
+        return reg.test(obj.toString());
+
+    }
+
+
+    //oLi.addEventListener("click",function(){},false);
+    //oLi.onclick=function(){};
+    //oLi.removeEventListener();//新版的事件方法 API
+    //类，new 类
+    var ele=document.createElement("div");
+    //工厂方法：来料加工。div -- return new HTMLDivElement
+   // var ele=new HTMLDivElement;
+    //var oImg=new Image();//HTMLImageElment
+    //oImg.app
+
+Array.prototype.toString=function(){
+    return this.join("+")
+}
+</script>

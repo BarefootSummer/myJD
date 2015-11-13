@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="">
+    姓名<input type="text" name="name" value="请输入姓名" id="name"/>
+    年龄<input type="text" name="age" value="请输入年龄" id="age"/>
+
+</form>
+input.on鼠标进来的时候（onfocus）=function(){
+    把默认的提示值清空
+}
+input.on鼠标离开的时候(onblur)=function(){
+    先把this.value中的空格清掉，
+    然后再做正常字符和中文的验证regText=/^[\u4e00-\u9fa5a-z]+$/i;
+    if(通不过验证){
+        提示验证失败的信息
+
+            创建一个span，在span里提示，
+                当然在创建之前先要判断一下这个span是否存在，如果存在则不需要重复创建，只要得达到它，修改提示信息就好
+
+    }else{
+        验证成功
+            则提示正确的信息
+}
+
+}
+</body>
+</html>
+        <script>
+            document.getElementById("name").onfocus=function(){
+                this.value="";
+            }
+            document.getElementById("name").onblur=function(){
+                reg=/^\s*$/;
+                if(reg.test(this.value)){
+                    this.value=this.defaultValue;
+                }else{
+                    this.value=this.value.replace(/\s+/g,"")
+                    var regText=/^[\u4e00-\u9fa5a-z]+$/i;
+                    if(!regText.test(this.value)){//不成功的时候
+                        var oSpan=this.nextSibling;
+                        if(oSpan.tagName=="SPAN"){
+                            //如果存在这年提示标签（有可能正确的时候创建的）
+                            oSpan.innerHTML="*请好好说话"
+                            oSpan.style.color="red";
+                        }else{
+                            oSpan=document.createElement("span");
+                            oSpan.innerHTML="*请好好说话"
+                            oSpan.style.color="red";
+                            var parent=this.parentNode;
+                            parent.insertBefore(oSpan,this.nextSibling)
+
+                        }
+
+                    }else{
+                        var ele=this.nextSibling;
+                        if(ele.tagName=="SPAN"){
+                            ele.innerHTML="恭喜你答对了";
+                            ele.style.color="green"
+                        }else{
+                            var oSpan=document.createElement("span");
+                            oSpan.innerHTML="恭喜你答对了";
+                            oSpan.style.color="green";
+                            var parent=this.parentNode;
+                            parent.insertBefore(oSpan,this.nextSibling)
+                        }
+                    }
+                }
+
+            }
+
+
+        </script>
