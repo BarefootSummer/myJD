@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 1000%;
+            background: #ffeedd;
+            background: -webkit-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+            background: -moz-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+            background: -ms-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+            background: -o-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+            background: linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+        }
+
+        #div1 {
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            width: 80%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #008000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<!--<div id="div1"></div>-->
+
+<script type="text/javascript">
+    //var oDiv = document.getElementById("div1");
+    //scrollTop:竖向滚动条卷去的高度
+    //scrollLeft:横向滚动条卷去的宽度
+
+    //1)之前学习的client系列/offset系列/scrollWidth/scrollHeight，这些属性我们只能获取它的值,但是不能修改它的值,即使修改了也没有任何的作用 ->所以我们说之前的这些属性是"只读"的
+    //document.documentElement.clientWidth=100;
+    //document.body.clientWidth=100;
+
+    //2)scrollTop/scrollLeft是JS盒子模型中唯一的两个可以"读写"的属性
+    //scrollTop是存在最大值个最小值(最小值是0) ->当我们设置的值小于最小值或者大于最大值的时候,不管在怎么设置scrollTop的值不会在发生任何的改变
+    //    document.documentElement.scrollTop = -100;
+    //    document.body.scrollTop = -100;
+    //    oDiv.innerHTML = document.documentElement.scrollTop || document.body.scrollTop;
+
+
+    //3)给当前页面绑定滚动滚动事件 ->只要滚动条滚动了就会执行对应的方法(拖拽滚动条滚动、鼠标滑轮控制滚动、JS设置具体的scrollTop的值...)
+    //    window.onscroll = function () {
+    //        var curTop = document.documentElement.scrollTop || document.body.scrollTop;
+    //        oDiv.innerHTML = "页面卷去的高度:" + curTop;
+    //    };
+</script>
+</body>
+</html>

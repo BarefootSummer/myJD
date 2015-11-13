@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+课下必看的几个视频
+toString专题
+http://www.zhufengpeixun.com/kecheng/detail_859484
+call的深入理解的一道作业题
+http://www.zhufengpeixun.com/kecheng/detail_859485
+JSON专题（两讲）
+http://www.zhufengpeixun.com/kecheng/detail_885431
+</body>
+</html>
+<script>
+   /// HTMLDIVElement
+   // toString
+    //写一个方法：判断一个对象是数组的实例
+    var a=[];
+    var obj={};
+    a instanceof  Array;
+    function InheritArray(){}
+    InheritArray.prototype=new Array;
+    var a2=new InheritArray;
+    a2 instanceof  Array
+
+    //[object Array]默认情况下，每个实例的toString方法都会输出这样格式的字符串
+    function isArray(obj){
+        //return obj.toString()=="[object Array]";
+        return Object.prototype.toString.call(obj)=="[object Array]"
+    }
+
+    null,undefined;//标识型的数据类型
+    Object.prototype.toString.call(null);
+    Object.prototype.toString.call(undefined)
+try{}catch(e){}
+    eval(function(){},function(){});
+
+    var x=20;
+    obj={x:10,fn:function(){alert(this.x)}}
+    (obj.fn)();//一个属性或一个变量直接放在括号里，还是这个属性本身
+    (obj.fn=obj.fn)();//但是在括号里一但是个运算的表达式，就不一样的，相当于obj.fn=obj.fn,temp=obj.fn,其实就相当于最后把obj.fn上保存这个方法赋给了一个无宿主的变量或属性，或者说相当于这个括号运算符返回一个匿名方法
+    (1,2,3,obj.fn)();
+
+</script>
