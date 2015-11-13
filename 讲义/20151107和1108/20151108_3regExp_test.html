@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var s1="abc&+-987?.,"
+    console.log(s1.split(/\b/))
+var reg=/\d\*+/;//表示一个数字出现一次，星号可以出现1到多
+    reg=/(\d\*)+/;//表示重复出现的是数字和*连续的，3*5*9*
+    reg=/[\d*]+/;//表示数字或*本身其中的一个连续出现就行。*出现在[]里可不转义
+    var reg1=/\d+/;
+    var s1="abc3jdjj8"
+    var reg2=/^\d+$/;
+    //reg2只能匹配纯数字
+
+    //+888,-999,777
+    reg3=/^[+-]?\d+$/;//匹配可以带正负号的纯数字
+
+    //表示或运算的
+    var str1="I feel terrible,I  am a Chinese,no money no glad";
+    var str2="I am a French";
+    var str3="I am an American";
+    var str4="I am a Japanese";
+
+    var reg=/^I am +(a|an) +(Chinese|French|American|Japanese)$/;
+    var reg=/[0-9]/
+    reg=/[0-100]/
+   // reg=/[9-0]/
+    reg=/[A-z]/;
+    reg=/[\u0041-\u007a]/
+    //基本和扩展 256  扩展的ASCII码，两个，组成一个汉字
+    var regChinese=/^[\u4e00-\u9fa5]+$/;
+
+    var reg=/^[^a-z]/;//非a-z这个范围
+
+//正则类上的方法，只有两个：test，exec
+    //test验证匹配，exec用来把匹配到的内容捕获
+//正则的特征：贪婪和懒惰
+    var str1="acd8888kdkf9999akdf"
+    var reg=/\d+?/;
+    //在量词后边加?，表示非贪婪捕获
+    //如果正则不加g，则每次捕获都从索引0开始，加了g之后，这次捕获从那儿呢？从上次捕获的结束位置开始。它是怎么知识上一次捕获的结束位置的呢？叫reg.lastIndex
+    reg=/\d+/g;//如果给正则加个模式修正符g，就可以实现自动多次捕获
+    //console.log(reg.exec(str1));
+    console.log(str1.match(reg))
+
+
+
+
+</script>
