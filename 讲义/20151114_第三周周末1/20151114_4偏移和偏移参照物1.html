@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+div{ margin:100px; height:200px; width:200px;  background:red; }
+#inner{ width:100px; height:100px; background:black; line-height:100px; margin:50px auto; color:white;}
+#red1{ width:100px; height:100px; background:red; line-height:100px; margin:50px auto; color:white;}
+</style>
+</head>
+
+<body>
+<div ></div>
+<div style="float:right;" >
+	<div id="inner">
+    	我是内部的小黑
+    </div>
+</div>
+<div style="position:relative; float:right; clear:both; background:green" >
+	postion:relative对red1的offsetParent的变化起了决定作用
+	<div id="red1">
+    	我是内部的小红
+    </div>
+</div>
+<div ></div>
+</body>
+</html>
+<script>
+	//每一个盒子都会在网页上产生偏移，两个问题：偏移的量是多少？偏移的参照物是谁？
+	//（偏移的参照物会变化，什么时候发生变化）
+	
+	//关于偏移量的两个属性：offsetLeft,offsetTop;
+	var ele=document.getElementsByTagName("div").item(1);
+	console.log("offsetLeft"+ele.offsetLeft);
+	console.log("offsetTop"+ele.offsetTop);
+
+//参照物：默认参照物，所有的元素都相同，是body，表示偏移量参照物的属性是offsetParent;
+//offsetParent和parentNode不存在直接的关系
+	console.log("小黑的偏移参照物："+inner.offetParent);
+	console.log("小黑的偏移量："+inner.offsetLeft);
+	
+//什么情况下，偏移参照物会发生改变,原理和z-index属性起作用的原理是一样的
+
+	//层级发生了改变，既：，写了定位：relative,absolute,fixed之后，layout会发现变化，会形成新的层级，这会再去写z-index属性才起作用。同样，每次形成新的层级，也会形成一个新的offsetParent,也就是说每个盒子的偏移都是以当前的这个层级做的偏移
+	//计算red1距离浏览器的偏移量是下面的写法
+	red1.offsetLeft+red1.offsetParent.offsetLeft
+
+
+
+
+</script>
