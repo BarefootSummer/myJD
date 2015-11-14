@@ -150,17 +150,24 @@ window.onload=function(){
 		var windowBottom=(document.documentElement.scrollTop||document.body.scrollTop)+(document.documentElement.clientHeight||document.body.clientHeight);
 		for(var i=0;i<oImgs.length;i++){
 			var oImg=oImgs.item(i);
-			if(oImg.posi<windowBottom){
-				var tempImg=new Image;
-				tempImg.src=oImg.getAttribute("realImg")+"?"+Math.random();
-				tempImg.onload=function(){
-					oImg.src=this.src;	
-				}
-				oImg.src="o_loading.gif";
+			if(!oImg.loadFlag&&oImg.posi<windowBottom){
+				loadImg(oImg);
 			}
 		}
 		
 	}
 	
+}
+
+function loadImg(oImg){//只负责正确加载图片
+	//if(oImg.posi<windowBottom){
+				var tempImg=new Image;
+				tempImg.src=oImg.getAttribute("realImg")+"?"+Math.random();
+				tempImg.onload=function(){
+					oImg.src=this.src;	
+					oImg.loadFlag=true;//增加一个自定义属性，用来标识图片是否已经成功加载过。
+				}
+				oImg.src="o_loading.gif";
+		
 }
 </script>
