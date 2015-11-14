@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1">
+        我是div1
+    </div>
+</body>
+</html>
+<script>
+    //call和apply方法就是强制改变一个方法的this关键字的指向的
+    var innerHTML="window";
+    var obj={innerHTML:"obj",fn:function(){
+        var counter=null;
+        for(var i=0;i<arguments.length;i++) {
+            counter+=arguments[i];
+
+        }
+        this.innerHTML=counter;
+        alert(this);
+    }}
+
+    obj.fn();
+    obj.fn.call(div1);
+    obj.fn.apply(div1);
+    //call和apply方法功能一样，这两个方法如果只给一个参数，没有区别
+    //call方法可以n个参数，apply最多只能有两个参数
+
+    obj.fn.call(div1,1,2,3,4);//call从第二个参数起，把这些参数转交给fn这个方法
+    obj.fn.apply(div1,[8,8,8,8]);//apply最多只有两个参数，是以一个集合的方式把参数打包传给fn这个方法
+    obj.fn.call();//就是说如果没有能明确指定上下文，则以window为上下文
+
+    var a=[100,80,73,84,11,7];
+    //写一种最快捷的方式，把数据a中的最大值或最小值得到
+    var min=a[0];
+    for(var i=1;i< a.length;i++){
+        if(min>a[i]){
+            min=a[i];
+        }
+    }
+    alert(min);
+
+    a.sort(function(a,b){return a-b});
+    a[0];
+    Math.max();Math.min(0,2,3,4,5,58);
+    Math.max(a);Math.min(a);
+    var min=Math.min.apply(null,a);
+    Function.prototype
+    call,apply
+    //一定要分清这样两件事：apply里的this是谁，一个是它改变了谁的this指向
+    //一定要理解的是：是方法来执行apply或call这个方法
+    Math.max.toString();
+    Math.max.call()
+    Math.min.call();
+    Math.max.call.call();
+    Math.max.call.call.call.call.call();
+    a.slice(0)
+
+
+
+
+
+
+
+
+
+</script>
