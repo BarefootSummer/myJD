@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<div id="div1" style="width:300px; height:300px; background:green; z-index:2; position:relative; margin-top:50px;">
+	layout的概念：一般情况下，写了定位：relative,absolute,fixed之后，layout会发现变化，会形成新的层级，这会再去写z-index属性才起作用。同样，每次形成新的层级，也会形成一个新的offsetParent,也就是说每个盒子的偏移都是以当前的这个层级做的偏移。
+</div>
+<div id="div2" style="width:200px; height:200px; background:red; margin-top:-100px; margin-left:100px; z-index:-1;   ">
+
+
+</div>
+
+
+
+<div id="outer" style=" position:relative; height:300px; background:#ccc; clear:both;  width:1000px;">
+	<div id="inner" style="width:400px; background:green; float:right; height:250px; margin:20px 0; position:relative">
+    	<p id="p1" style=" background:red; border:50px solid blue;   width:200px; height:200px; float:left; position:relative; margin:20px;"> 
+        	<a  id="a1"href="###" style="float:right; margin: 20px; background:yellow;">计算此超链接距离浏览器的偏移</a>
+        </p>
+    </div>
+
+</div>
+</body>
+</html>
+<script>
+var ele=document.getElementById("a1");
+
+
+function offset(ele){
+	var l=ele.offsetLeft;
+	var t=ele.offsetTop;
+	var p=ele.offsetParent;
+	
+	while(p){
+		if(window.navigator.userAgent.indexOf("MSIE 8")>-1){
+			l+=p.offsetLeft;
+			t+=p.offsetTop;
+		}else{//标准浏览器要把边框计算进去
+			l+=p.offsetLeft+p.clientLeft;//client左边框的宽
+			t+=p.offsetTop+p.clientTop;//上边框的宽
+		}
+		p=p.offsetParent;	
+	}
+	
+	return {l:l,t:t}
+	/*	
+	相当于下边这四行代码
+	var obj={};
+	obj.l=l;
+	obj.t=t;
+	return obj;
+	*/
+	
+}
+/*var obj=offset(ele);//返回一个对象
+	obj.l;
+	obj.t;
+	console.log(obj.l);
+*/
+console.log(offset(ele).l);
+//以上的计算结果会发现：少p1的边框的宽度
+//这说明offsetLeft是：从自身的边框的外侧开始算起，算到offsetParent边框的内侧结束。这样在做连续计算的时候，会把边框忽略掉
+</script>
