@@ -47,16 +47,20 @@ function offset(ele){
 	}
 	
 	return {l:l,t:t}
+	/*	
+	相当于下边这四行代码
 	var obj={};
 	obj.l=l;
 	obj.t=t;
 	return obj;
+	*/
 	
 }
-/*var obj=offset(ele);
-obj.l;
-obj.t;
-console.log(obj.l);*/
+/*var obj=offset(ele);//返回一个对象
+	obj.l;
+	obj.t;
+	console.log(obj.l);
+*/
 console.log(offset(ele).l);
 //以上的计算结果会发现：少p1的边框的宽度
 //这说明offsetLeft是：从自身的边框的外侧开始算起，算到offsetParent边框的内侧结束。这样在做连续计算的时候，会把边框忽略掉
