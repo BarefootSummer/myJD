@@ -18,7 +18,7 @@
 
 <div id="outer" style=" position:relative; height:300px; background:#ccc; clear:both;  width:1000px;">
 	<div id="inner" style="width:400px; background:green; float:right; height:250px; margin:20px 0; position:relative">
-    	<p id="p1" style=" background:red;   width:200px; height:200px; float:left; position:relative; margin:20px;"> 
+    	<p id="p1" style=" background:red; border:50px solid blue;   width:200px; height:200px; float:left; position:relative; margin:20px;"> 
         	<a  id="a1"href="###" style="float:right; margin: 20px; background:yellow;">计算此超链接距离浏览器的偏移</a>
         </p>
     </div>
@@ -27,29 +27,37 @@
 </body>
 </html>
 <script>
-//计算a1距离浏览器的偏移量
-//1、先算出a1距离p1的偏移
-	var n=a1.offsetLeft
-//2、再算出p1到inner的偏移
-	n+=a1.offsetParent.offsetLeft;//n+=p1.offsetLeft
-//3、再算出inner到outer的偏移
-	n+=a1.offsetParent.offsetParent.offsetLeft;//n+=inner.offsetLeft;
-//4、最后算出outer到body的偏移
-	n+=a1.offsetParent.offsetParent.offsetParent.offsetLeft;
-	//相当于n+=outer.offsetLeft;
-//最后算到body不要再计算了，再累加一次也不为错，只不过就是累加一次0了
+var ele=document.getElementById("a1");
+
 
 function offset(ele){
 	var l=ele.offsetLeft;
+	var t=ele.offsetTop;
 	var p=ele.offsetParent;
+	
 	while(p){
-		l+=p.offsetLeft;
-		p=p.offsetParent;
+		if(window.navigator.userAgent.indexOf("MSIE 8")>-1){
+			l+=p.offsetLeft;
+			t+=p.offsetTop;
+		}else{//标准浏览器要把边框计算进去
+			l+=p.offsetLeft+p.clientLeft;//client左边框的宽
+			t+=p.offsetTop+p.clientTop;//上边框的宽
+		}
+		p=p.offsetParent;	
 	}
-	return l;
+	
+	return {l:l,t:t}
+	var obj={};
+	obj.l=l;
+	obj.t=t;
+	return obj;
+	
 }
-
-
-
-
+/*var obj=offset(ele);
+obj.l;
+obj.t;
+console.log(obj.l);*/
+console.log(offset(ele).l);
+//以上的计算结果会发现：少p1的边框的宽度
+//这说明offsetLeft是：从自身的边框的外侧开始算起，算到offsetParent边框的内侧结束。这样在做连续计算的时候，会把边框忽略掉
 </script>
