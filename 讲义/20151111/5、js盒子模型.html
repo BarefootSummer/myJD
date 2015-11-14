@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body, div {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        #div1 {
+            margin: 20px;
+            padding: 10px;
+            width: 150px;
+            height: 150px;
+            line-height: 20px;
+            border: 5px solid #08BECE;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    站在台风口上,猪都能飞起来,如果你们不努力...;学习好的绝对不仅仅是基础好的,基础不好的在珠峰拿14K以上的大有人在;站在台风口上,猪都能飞起来,如果你们不努力...;学习好的绝对不仅仅是基础好的,基础不好的在珠峰拿14K以上的大有人在;
+</div>
+
+<script type="text/javascript">
+    //JS盒子模型只的是:JS中提供了一系列的属性和方法让我们来获取盒子的样式信息等 ->DOM系列
+    //我们需要学习的有13个属性和两个方法
+
+    //var oDiv = document.getElementById("div1");
+
+    //width/height:真实内容的宽度/高度,但是如果我们在样式中设置了固定的宽高值,那么width/height就是我们设置的值(不管内容是不够还是溢出都是设置的值)
+
+    //1、client系列
+    //内容是否溢出对其没有任何的影响
+    //clientWidth:width+左右padding
+    //clientHeight:height+上下padding
+
+    //clientTop:上边框的高度
+    //clientLeft:左边框的宽度
+    //其实都是自己的border-width的值
+
+    //2、offset系列
+    //内容是否溢出对其没有任何的影响
+    //offsetWidth:clientWidth+左右边框的宽度
+    //offsetHeight:clientHeight+上下边框的高度
+
+    //3、scroll系列
+    //[在没有内容溢出的情况下]
+    //scrollWidth:clientWidth
+    //scrollHeight:clientHeight
+
+    //[在内容有溢出的情况下]
+    //scrollWidth:约等于 真实内容的宽度(包含溢出的部分)+左padding
+    //scrollHeight:约等于 真实内容的高度(包含溢出的部分)+上padding
+    //但是添加overflow:hidden溢出隐藏的样式和不添加这个样式在同一个浏览器中获取的值是有偏差的;并且不同的浏览器之间获取的值也是有偏差的;
+
+
+    //如果我们想获取关于浏览器的JS盒子模型的值,在获取的时候,需要按照如下的写法才能兼容所有的浏览器:
+    //document.documentElement在前,document.body在后
+    //document.documentElement.xxx||document.body.xxx;
+
+    //获取当前浏览器一屏幕的宽和高
+    //var curW = document.documentElement.clientWidth || document.body.clientWidth;
+    //var curH = document.documentElement.clientHeight || document.body.clientHeight;
+
+    //或者整个页面的高度(一般一个页面或出现多平)
+    //var fullH = document.documentElement.scrollHeight || document.body.scrollHeight;
+
+
+    //2、以上属性虽然可以帮助我们快速的获取JS盒子模型的信息,但是对于具体的某一个样式(例如:我只想获取padding)我们还需要在处理,这样比较的麻烦-->单独的获取元素的样式信息的操作
+    var oDiv = document.getElementById("div1");
+
+    //1)oDiv.style.xxx 这样的方式只能获取行内上有的样式值,只要行内上没有写这个样式(不管css样式表中是否编写),我们都获取不到
+
+    //2)JS提供了一个方法[getComputedStyle],可以获取所有经过浏览器计算过的样式(只要元素在页面中可显示,那么所有的样式都是经过浏览器计算的,不管你是否写了)
+    //window.getComputedStyle([要操作的元素],[伪类,一般不用,不用的话写null])
+    //获取的是一个对象数据类型值,里面包含了我们所有的样式集合(CSSStyleDeclaration)->获取某一个具体的样式值,很多都是带着单位的
+    //console.log(window.getComputedStyle(oDiv, null).marginBottom);//->"20px"
+
+    //getComputedStyle这个方法在IE6~8下不兼容,但是浏览器提供给我们一个替代的方法:currentStyle
+    //console.log(oDiv.currentStyle.marginBottom);
+
+    /*
+     * getCss:获取当前元素的某一个属性的样式值
+     * @parameter
+     *   curEle:[object] 当前要操作的那个元素
+     *   attr:[string] 当前要获取的样式属性名
+     * @return
+     *   获取的最后结果值
+     * by team on 2015/11/11
+     */
+    //    function getCss(curEle, attr) {
+    //        var val = null;
+    //        if ("getComputedStyle" in window) {
+    //            val = window.getComputedStyle(curEle, null)[attr];
+    //        } else {
+    //            val = curEle.currentStyle[attr];
+    //        }
+    //        return val;
+    //    }
+
+    //优化:对于获取的结果带着单位的,我们把它处理掉
+    function getCss(curEle, attr) {
+        var reg = /^[+-]?(?:\d|[1-9]\d+)(?:\.\d+)?(px|em|rem|pt)$/g, val = null;
+        val = "getComputedStyle" in window ? window.getComputedStyle(curEle, null)[attr] : curEle.currentStyle[attr];
+        return reg.test(val) ? parseFloat(val) : val;
+    }
+    console.log(getCss(oDiv, "marginTop"));
+</script>
+</body>
+</html>

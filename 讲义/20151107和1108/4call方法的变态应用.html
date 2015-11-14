@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    function fn(){alert(this)}
+    fn.call(document);//[object HTMLDocument]
+    fn.call.call.call(fn);//这个的结果是什么呢？
+
+    //fn和call都是Function类的实例
+    //但是call方法又是Function类prototype上定义的方法
+    //也就是说call方法既是Function类的实例，又是这个类的原型上定义的方法
+    var fn1=Function.prototype.call;
+    var fn2=fn.call;
+    fn2.call.apply.call.call(fn);//这样，让最后一个call方法执行了，让前边的call执行并且this指向fn；
+    //既然call里的this指向了fn：一个类上的方法在执行时，它的this指向谁，就是那个“谁”在执行这个方法。根据这个原则，可以得出上面的表达式相当于fn.call()，其实就是相当于fn();
+    //这fn.call();//就是相当于fn直接执行
+    //a.slice(0)
+
+//请吃饭
+  //  小明.三叔.二姑父.四舅.五大爷.小儿子.请吃饭
+
+    fn.call()//为什么这样就相当于是让fn在执行
+    //fn();
+    //fn.call()
+    fn.call.call.call.call();//这样为什么会报错
+    //undefined.call()
+
+
+
+</script>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function fn(arg){
+        alert(arg);
+    }
+    fn.apply(/*null,9*/)//如果不传参数，相同于把undefied传给了apply，这个fn里的this就会指向window
+    fn();//这样，arg的值就是undefied
+</script>
