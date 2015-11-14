@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    try{//一定会执行到这里来
+        alert(a);
+    }catch(error){
+        //能不能执行到这儿来，要看try是不是有事故
+
+        console.log(error);
+        alert(b)
+    }finally{
+        //无论是以上代码那儿出些的错误，这里都要执行
+        console.log("无论上边发生多大事，我这里一定要运行")
+    }
+
+
+</script>

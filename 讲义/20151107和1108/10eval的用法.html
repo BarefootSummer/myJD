@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+        <script>
+            var s="alert(9)";
+            eval(s);
+            var obj={name:"tom",age:22,hobby:"吃饭睡觉打豆豆"}
+            var str1='{name:"tom",age:22,hobby:"吃饭睡觉打豆豆"}'
+            var str2='{"name":"tom","age":22,"hobby":"吃饭睡觉打豆豆"}'
+            var obj2={"name":"tom","age":22,"hobby":"吃饭睡觉打豆豆"}
+            //str2是严格格式的JS对象格式的字符串，这样的字符串叫JSON字符串
+            //JSON是一种格式，它既不是对象，也是字符串，是一种数据格式
+            //JSON.parse()//这个负责把JSON格式的字符串转化为JS对象
+            //JSON.stringify()//负责把JS对象转化对JSON格式的字符串
+
+        //Unexpected token 这个异常信息表示和约定的格式不一致，你要去查你的数据的格式是否合法
+            var obj3=eval("("+str2+")")
+           var aJson= [
+            {"name":"tom","age":22,"hobby":"吃饭睡觉打豆豆"},
+            {"name":"tom","age":22,"hobby":"吃饭睡觉打豆豆"},
+            {"name":"tom","age":22,"hobby":"吃饭睡觉打豆豆"},
+            {"name":"tom","age":22,"hobby":"吃饭睡觉打豆豆"}
+
+                    ]
+        </script>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        table,tr,td,th{ border: 1px solid blue; border-collapse: collapse;}
+        th{ cursor: pointer; -webkit-user-select: none;}
+    </style>
+</head>
+<body>
+<table align="center" width="700">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>语文</th>
+            <th>数学</th>
+            <th>英语</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>唐僧</td>
+        <td>50</td>
+        <td>60</td>
+        <td>120</td>
+    </tr>
+    <tr>
+        <td>悟空</td>
+        <td>100</td>
+        <td>78</td>
+        <td>60</td>
+    </tr>
+    <tr>
+        <td>八jie</td>
+        <td>40</td>
+        <td>89</td>
+        <td>88</td>
+    </tr>
+    <tr>
+        <td>沙和尚</td>
+        <td>76</td>
+        <td>77</td>
+        <td>79</td>
+    </tr>
+    <tr>
+        <td>白骨精</td>
+        <td>80</td>
+        <td>93</td>
+        <td>82</td>
+    </tr>
+    <tr>
+        <td>女儿国王</td>
+        <td>91</td>
+        <td>100</td>
+        <td>99</td>
+    </tr>
+    <tr>
+        <td>牛魔王</td>
+        <td>70</td>
+        <td>66</td>
+        <td>73</td>
+    </tr>
+</table>
+
+</body>
+</html>
+<script>
+    function listToArray(list){
+        try{
+            return Array.prototype.slice.call(list,0)
+        }catch(e){
+            var a=[];
+            for(var i=0;i<list.length;i++){
+                a.push(list[i]);
+            }
+            return a;
+        }
+    }
+    var oTable=document.getElementsByTagName("table").item(0);
+    var oTbody=oTable.tBodies.item(0);//行是tbody里的行
+    var oRows=oTbody.rows;//行集合
+    //如果你想取得行里的列，是oRows[i].cells
+    oRows[0].cells[0].innerHTML="玉皇大帝";
+    var aRows=listToArray(oRows);//把DOM集合转为数组
+
+    //第二次的步骤：加在点击事件的排序
+    //var flag=-1;
+    var ths=oTable.getElementsByTagName("th");
+    var ths=oTable.tHead.rows.item(0).cells;//这两行都可以得到th集合
+    for(var i=0;i<ths.length;i++){
+        ths[i].i=i;
+        ths[i].flag=-1;
+        ths[i].onclick=function(){
+            var index=this.i;
+            this.flag*=-1;
+            var flag=this.flag;
+            aRows.sort(function(a,b){
+                if(index===0){
+                    return flag*(a.cells[index].innerHTML.localeCompare(b.cells[index].innerHTML))
+                }else{
+                    return flag*(a.cells[index].innerHTML- b.cells[index].innerHTML);
+
+                }
+                })
+            for(var i=0;i<aRows.length;i++){
+                oTbody.appendChild(aRows[i]);
+            }
+        }
+    }
+</script>
