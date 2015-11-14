@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#content{ height:200px; background:lightgreen; text-align:center; font-size:36px; line-height:200px;}
+</style>
+</head>
+
+<body style="height:5000px;"><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div id="content">
+	我是原来的文字
+</div>
+</body>
+</html>
+<script>
+//如何知道浏览器的滚动条在变化
+//如何判断某个元素进入到浏览器的可视窗口内
+
+var contentBottom=offset(content).t+content.clientHeight;
+
+window.onscroll=function(){
+	//console.log(document.documentElement.scrollTop,document.body.scrollTop);
+	//现在是计算当前可视窗口的像素范围
+	//当前可视窗口的起始位置就是document.documentElement.scrollTop,document.body.scrollTop
+	//终点是：(document.documentElement.scrollTop,document.body.scrollTop)+(document.docuemntElment.clientHeight||document.body.clientHeight)
+	
+	//如何判断某元素在可视窗口内呢？
+	//这个元素的下边的位置<浏览器可视窗口的下边的位置
+	//注意：元素的位置是固定的，但浏览器的可视窗口是不断变化的
+	
+	var windowBottom=(document.documentElement.scrollTop||document.body.scrollTop)+(document.documentElement.clientHeight||document.body.clientHeight);
+	if(contentBottom<windowBottom){
+		content.innerHTML="给我变！！！"
+	}
+}
+
+
+
+
+function offset(ele){
+	var l=ele.offsetLeft;
+	var t=ele.offsetTop;
+	var p=ele.offsetParent;
+	
+	while(p){
+		if(window.navigator.userAgent.indexOf("MSIE 8")>-1){
+			l+=p.offsetLeft;
+			t+=p.offsetTop;
+		}else{//标准浏览器要把边框计算进去
+			l+=p.offsetLeft+p.clientLeft;//client左边框的宽
+			t+=p.offsetTop+p.clientTop;//上边框的宽
+		}
+		p=p.offsetParent;	
+	}
+	
+	return {l:l,t:t}	
+}
+//注意：在标准浏览器中，并且写了规范的文档声明，则这个文档的实际内容高度是document.documentElement.scrollHeight，可视窗口（容器）的高度是document.documentElement.clientHeight
+</script>
