@@ -77,26 +77,30 @@
         goTo.style.display = curT >= curH ? "block" : "none";
     }
     window.onscroll = scrollMove;
+    /*绑定滚动事件*/
 
     //给我们的goTo绑定点击事件,当点击的时候让页面的scrollTop从当前位置变为0
     goTo.onclick = function () {
-        //为了防止用户的重复点击,我们点击的时候让当前的按钮隐藏
-        this.style.display = "none";
-        //但是我们发现,触发了onscroll事件,又从新的计算,从新的让我们的按钮显示
-        window.onscroll = null;
-
-        //实现动画逐步运动到开始的位置
-        var tarT = getWin("scrollTop") - 0;
-        var step = (tarT / 500) * 10;
-        var timer = window.setInterval(function () {
-            document.documentElement.scrollTop -= step;
-            document.body.scrollTop -= step;
-            if (getWin("scrollTop") <= 0) {
-                window.onscroll = scrollMove;
-                window.clearInterval(timer);
-            }
-        }, 10);
+        var curT = document.documentElement.scrollTop || document.body.scrollTop;
+        curT = 0;
     };
+        //为了防止用户的重复点击,我们点击的时候让当前的按钮隐藏
+//        this.style.display = "none";
+//        //但是我们发现,触发了onscroll事件,又从新的计算,从新的让我们的按钮显示
+//        window.onscroll = null;
+//
+//        //实现动画逐步运动到开始的位置
+//        var tarT = getWin("scrollTop") - 0;
+//        var step = (tarT / 500) * 10;
+//        var timer = window.setInterval(function () {
+//            document.documentElement.scrollTop -= step;
+//            document.body.scrollTop -= step;
+//            if (getWin("scrollTop") <= 0) {
+//                window.onscroll = scrollMove;
+//                window.clearInterval(timer);
+//            }
+//        }, 10);
+  
 </script>
 </body>
 </html>
