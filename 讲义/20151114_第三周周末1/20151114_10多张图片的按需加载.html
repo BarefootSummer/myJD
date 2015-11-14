@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body style="height:5000px;">
+http://www.nadoujp.com/uploads/131216/4-131216102132158.jpg
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<img realImg="http://pic1.win4000.com/pic/9/8c/0a08466924.jpg" src="default.gif">
+
+<img realImg="http://pic1.win4000.com/pic/9/8c/0a08466925.jpg" src="default.gif">
+<img realImg="http://pic1.win4000.com/pic/9/8c/0a08466926.jpg" src="default.gif">
+<img realImg="http://pic1.win4000.com/pic/9/8c/0a08466927.jpg" src="default.gif">
+
+<img realImg="http://pic1.win4000.com/pic/9/8c/0a08466928.jpg" src="default.gif">
+</body>
+</html>
+<script>
+//图片的缓存机制
+//图片加载的事件
+
+var str="http://www.nadoujp.com/uploads/131216/4-131216102132158.jpg";
+/*var oImg=new Image;
+oImg.src=str+"?"+Math.random();
+oImg.onload=function(){
+	alert("苍老师来了！！");	
+}
+oImg.onerror=function(){
+	alert("你谁啊，我来不了！！");	
+}*/
+
+function offset(ele){
+	var l=ele.offsetLeft;
+	var t=ele.offsetTop;
+	var p=ele.offsetParent;
+	
+	while(p){
+		if(window.navigator.userAgent.indexOf("MSIE 8")>-1){
+			l+=p.offsetLeft;
+			t+=p.offsetTop;
+		}else{//标准浏览器要把边框计算进去
+			l+=p.offsetLeft+p.clientLeft;//client左边框的宽
+			t+=p.offsetTop+p.clientTop;//上边框的宽
+		}
+		p=p.offsetParent;	
+	}
+	
+	return {l:l,t:t}	
+}
+
+</script>
