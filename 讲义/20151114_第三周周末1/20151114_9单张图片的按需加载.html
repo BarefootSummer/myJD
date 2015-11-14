@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body style="height:5000px;">
+http://www.nadoujp.com/uploads/131216/4-131216102132158.jpg
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<img src="default.gif" width="200" height="200">
+<img src="default.gif">
+</body>
+</html>
+<script>
+//图片的缓存机制
+//图片加载的事件
+
+var str="http://www.nadoujp.com/uploads/131216/4-131216102132158.jpg";
+/*var oImg=new Image;
+oImg.src=str+"?"+Math.random();
+oImg.onload=function(){
+	alert("苍老师来了！！");	
+}
+oImg.onerror=function(){
+	alert("你谁啊，我来不了！！");	
+}*/
+
+function offset(ele){
+	var l=ele.offsetLeft;
+	var t=ele.offsetTop;
+	var p=ele.offsetParent;
+	
+	while(p){
+		if(window.navigator.userAgent.indexOf("MSIE 8")>-1){
+			l+=p.offsetLeft;
+			t+=p.offsetTop;
+		}else{//标准浏览器要把边框计算进去
+			l+=p.offsetLeft+p.clientLeft;//client左边框的宽
+			t+=p.offsetTop+p.clientTop;//上边框的宽
+		}
+		p=p.offsetParent;	
+	}
+	
+	return {l:l,t:t}	
+}
+//生成DOM树和浏览器里的资源加载完成，不是回事
+window.onload=function(){
+	var oImg=document.getElementsByTagName("img").item(0);
+	var imgBottom=offset(oImg).t+oImg.clientHeight;//
+	window.onscroll=function(){
+		var windowBottom=(document.documentElement.scrollTop||document.body.scrollTop)+(document.documentElement.clientHeight||document.body.clientHeight);
+		if(imgBottom<windowBottom){
+			var tempImg=new Image;
+			tempImg.src=str+"?"+Math.random();
+			tempImg.onload=function(){//表示远程图片真正下载完成
+				oImg.src=this.src;
+			}
+			oImg.src="o_loading.gif";
+			
+			
+		}
+		
+	}
+	
+	
+	
+}
+
+
+alert(document.getElementsByTagName("img").item(0).clientHeight);
+</script>
