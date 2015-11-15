@@ -274,6 +274,7 @@ function changeTab(){
 	this.className="tab selectedTab";//让自己加上“选中”的样式
 	//接下来让它的“哥哥们”和“弟弟们”去掉“选中”的样式，只保留默认样式
 	
+	/* //这里的是基本步骤
 	//1.先操作“哥哥们”
 	var prev=this.previousSibling;
 	while(prev){
@@ -290,8 +291,16 @@ function changeTab(){
 			next.className="tab";	
 		}
 		next=next.nextSibling;
+	}*/
+	
+	//以下是使用封装好的DOM.siblings方法的方式
+	var siblings=DOM.siblings(this);
+	for(var i=0;i<siblings.length;i++){
+		siblings[i].className="tab";	
 	}
 }
+
+
 
 
 </script>

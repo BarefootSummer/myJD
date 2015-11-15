@@ -50,6 +50,26 @@ DOM.insertAfter=function(nodeBefore,nodeNext){
 	//如果insertBefore没有第二个参数没有或是null，则它相当于appendChild
 }
 
+DOM.siblings=function(ele){
+	var a=[];//先定义数组，用来保存哥哥们或弟弟们
+	var p=ele.previousSibling;
+	while(p){
+		if(p.nodeType===1){
+			a.unshift(p);//按顺序保存在数组里	
+		}
+		p=p.previousSibling;
+	}
+	
+	var next=ele.nextSibling;
+	while(next){
+		if(next.nodeType===1){
+			a.push(next);	
+		}
+		next=next.nextSibling;
+	}
+	
+	return a;
+}
 
 
 
