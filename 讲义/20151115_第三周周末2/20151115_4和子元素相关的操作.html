@@ -285,7 +285,8 @@ function changeTab(){
 	}
 	//最后把指定的（和选中的li相对应的）div的类样式设为选中的样式
 	contents[index].className="content selectedContent";
-	
+	//以上操作中，nextElementSibling和children有兼容性问题
+	//完成：next方法和children方法，解决这个问题
 }
 
 
