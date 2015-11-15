@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<ul>
+		<li class=" selectedTab  tab">选项一 </li>
+        <li class="tab">选项二</li>
+        <li class="tab">选项三 </li>
+        <p class="content">ppppp</p>
+        <li class="tab">选项四</li>
+         <p class="content">ppppp</p> 
+         <div>div</div>
+          <div>div</div>
+           <div>div</div>
+         <p class="content">ppppp</p>
+        <li class="tab">选项五 </li>
+        
+        <li class="tab selectedTab promoted content">选项一 </li>
+        <li class="tab">选项二</li>
+        <li class="tab">选项三 </li>
+        <p class="content">ppppp</p>
+        <li class="tab">选项四</li>
+         <p class="content">ppppp</p> 
+         <div>div</div>
+          <div class="tab">div,tab</div>
+           <div>div</div>
+         <p class="content">ppppp</p>
+        <li class="tab">选项五 </li>
+</ul>
+</body>
+</html>
+<script src="DOM.js"></script>
+<script>
+
+//匹配className属性中的类名，下面是以tab这个类名为例
+"tab selectedTab     promoted content"//第一种包含tab类的情况
+"selectedTab tab     promoted content"//第二种
+"selectedTab promoted content tab";//第三种
+"selected-tab"//这个不包含tab这个类名,这个类名不叫tab
+"abctabde";//不包含tab类名
+//写一个能正确匹配tab类名的正则
+//var reg=/\btab\b/;//为什么不用\b来写这个正则
+//alert(reg.test("selected-tab"));//这个结果表示它把selected-tab也当成了tab这个类名了，错了
+
+//或边可以是 1.开头或者是空格 2.类名 右边 3.可以空格或结束
+var reg=/(^| )content( |$)/g;
+
+var eles=document.getElementsByTagName("*");
+var a=[];
+for(var i=0;i<eles.length;i++){
+	var ele=eles[i];
+	if(reg.test(ele.className)){
+		a.push(ele);	
+	}
+}
+
+
+for(var i=0;i<a.length;i++){
+	a[i].style.backgroundColor="red";	
+}
+</script>
