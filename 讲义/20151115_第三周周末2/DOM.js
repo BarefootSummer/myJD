@@ -163,6 +163,23 @@ DOM.children=function(ele,tagName){//获得ele元素指定标签名的子元素
 	return a;		
 }
 
+//以下操作都和类样式有关：都是通过类名来操作元素的
+
+//通过类名获得元素
+DOM.getElesByClass=function(strClass){
+	
+}
+
+//给指定的元素ele增加一个类名
+DOM.addClass=function(ele,strClass){
+	
+}
+
+//
+DOM.removeClass=function(ele,strClass){
+	
+}
+
 
 
 
