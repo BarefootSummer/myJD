@@ -199,11 +199,18 @@ DOM.getElesByClass=function getElesByClass(strClass,context){//context是上下�
 
 //给指定的元素ele增加一个类名
 DOM.addClass=function(ele,strClass){
-	
+	var reg=new RegExp("(^| )"+strClass+"( |$)");
+	if(!reg.test(ele.className)){
+		ele.className+=" "+strClass;
+	}
 }
 
 //
 DOM.removeClass=function(ele,strClass){
+	var reg=new RegExp("(^| )"+strClass+"( |$)","g");
+	ele.className=ele.className.replace(reg," ");//这儿是空格，不是空字符串
+	
+	//"a b c";如果是去掉b，用正则匹配捕获到的是" b ",如果用空字符串替换，a和c就粘在一起了
 	
 }
 
