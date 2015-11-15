@@ -264,41 +264,29 @@ var oLis=document.querySelectorAll("li.tab");//选择器风格的DOM查找方法
 for(var i=0;i<oLis.length;i++){
 	
 	oLis.item(i).onclick=changeTab;
-	//一定要理解行为本身，和行为发生
-	
+		
 }
-//changeTab是完成选项卡切换的核心方法
-//首先实现的第一步：让changeTab方法自己来获得当前被点击的li的索引号
 function changeTab(){
 	var index=DOM.getIndex(this);
 	//alert(index);
 	this.className="tab selectedTab";//让自己加上“选中”的样式
-	//接下来让它的“哥哥们”和“弟弟们”去掉“选中”的样式，只保留默认样式
-	
-	/* //这里的是基本步骤
-	//1.先操作“哥哥们”
-	var prev=this.previousSibling;
-	while(prev){
-		if(prev.nodeType===1){
-			prev.className="tab";
-		}
-		prev=prev.previousSibling;
-	}
-	
-	//2.再操作弟弟们
-	var next =this.nextSibling;
-	while(next){
-		if(next.nodeType===1){
-			next.className="tab";	
-		}
-		next=next.nextSibling;
-	}*/
 	
 	//以下是使用封装好的DOM.siblings方法的方式
 	var siblings=DOM.siblings(this);
 	for(var i=0;i<siblings.length;i++){
 		siblings[i].className="tab";	
 	}
+	
+	//找到所有的内容div
+	var contents=this.parentNode.nextElementSibling.children;
+	//把所有的内容div的类样式恢复成默认样式
+	for(var i=0;i<contents.length;i++){
+		contents[i].className="content";	
+	}
+	//最后把指定的（和选中的li相对应的）div的类样式设为选中的样式
+	contents[index].className="content selectedContent";
+	//以上操作中，nextElementSibling和children有兼容性问题
+	//完成：next方法和children方法，解决这个问题
 }
 
 
