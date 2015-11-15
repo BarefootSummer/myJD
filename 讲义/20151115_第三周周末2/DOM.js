@@ -163,6 +163,57 @@ DOM.children=function(ele,tagName){//获得ele元素指定标签名的子元素
 	return a;		
 }
 
+//以下操作都和类样式有关：都是通过类名来操作元素的
+
+//通过类名获得元素
+DOM.getElesByClass=function getElesByClass(strClass,context){//context是上下文
+	context=context||document;
+	var eles=context.getElementsByTagName("*");
+	if(strClass.trim){
+		strClass=strClass.trim();//不但去掉了首尾空格，还把中间多余的空格也去掉了。	
+	}else{
+		var regTrim=/^ +| +$/g;
+		strClass=strClass.replace(regTrim,"");
+	}
+	var aClass=strClass.split(/ +/);
+	
+	for(var i=0;i<aClass.length;i++){
+		//eles=byClass(aClass[i],eles);
+		//在下面，要把byClass实现的逻辑在这里再实现一遍
+		//aClass[i]里面放的是具体每一个类名，通过这个类名生成正则，然后去匹配元素就可以了
+		
+		var reg=new RegExp("(^| )"+aClass[i]+"( |$)");
+		var a=[];//要把筛选的结果保存下来
+		for(var j=0;j<eles.length;j++){
+			var ele=eles[j];
+			if(reg.test(ele.className)){
+				a.push(ele);	
+			}
+		}
+		eles=a;//相当于return a之后，更新eles
+			
+	}
+	return eles;	
+}
+
+
+//给指定的元素ele增加一个类名
+DOM.addClass=function(ele,strClass){
+	var reg=new RegExp("(^| )"+strClass+"( |$)");
+	if(!reg.test(ele.className)){
+		ele.className+=" "+strClass;
+	}
+}
+
+//
+DOM.removeClass=function(ele,strClass){
+	var reg=new RegExp("(^| )"+strClass+"( |$)","g");
+	ele.className=ele.className.replace(reg," ");//这儿是空格，不是空字符串
+	
+	//"a b c";如果是去掉b，用正则匹配捕获到的是" b ",如果用空字符串替换，a和c就粘在一起了
+	
+}
+
 
 
 
