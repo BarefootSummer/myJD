@@ -80,7 +80,7 @@ DOM.next = function (ele) {
             if (next.nodeType === 1) {
                 return next;
             }
-            next = next.nextSibling;
+			next = next.nextSibling;
         }
         return null;
     }
@@ -99,7 +99,7 @@ DOM.prev = function (ele) {
         }
         return null;
     }
-    DOM.child=
+    //DOM.child=
 };
 
 //通过下面这个方法，把握null和undefined一些细节
