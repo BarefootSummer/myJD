@@ -258,5 +258,47 @@
 </body>
 </html>
 <script>
+var oLis=document.getElementsByClassName("tab");
+var oLis=document.querySelectorAll("li.tab");//选择器风格的DOM查找方法
+
+/*for(var i=0;i<oLis.length;i++){
+	oLis.item(i).index=i;
+	oLis.item(i).onclick=function(){
+		changeTag(this.index);
+	}
+	
+}
+
+for(var i=0;i<oLis.length;i++){
+	;(function(i){
+		oLis.item(i).onclick=function(){
+			changeTag(i);
+		}
+	})(i);
+	
+}*/
+
+for(var i=0;i<oLis.length;i++){
+	
+	oLis.item(i).onclick=changeTab;
+	
+}
+//changeTab是完成选项卡切换的核心方法
+//首先实现的第一步：让changeTab方法自己来获得当前被点击的li的索引号
+function changeTab(){
+	//this===当前被点中的li，这说明我可以找到当前被点的那个Li
+	this
+	var index=0;//假装它自己就是老大，如果在接下的“审问”过程中，发现它还有哥哥，则推翻这个假设
+	var p=this.previousSibling;
+	while(p){
+		if(p.nodeType===1){//如果找到它的一个哥哥，
+			index++;	//则让它的索引增加一次
+		}
+		p=p.previousSibling;
+	}
+	alert(index);
+}
+
+
 
 </script>
