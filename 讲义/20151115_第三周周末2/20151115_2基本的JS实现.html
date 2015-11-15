@@ -258,20 +258,5 @@
 </body>
 </html>
 <script>
-//低耦合 高内聚
-
-function fn1(){
-	//这样fn1方法和div1元素就产生依赖关系了，耦合在了一起
-	var ele=document.getElementById("div1");
-	//省略若干行代码，这些都操作ele的
-	
-}
-
-//使用传参数的方式解决这个问题
-function fn1(ele){
-	//var ele=document.getElementById("div1");
-	//省略若干行代码，这些都操作ele的
-	
-}
 
 </script>
