@@ -270,7 +270,28 @@ for(var i=0;i<oLis.length;i++){
 //首先实现的第一步：让changeTab方法自己来获得当前被点击的li的索引号
 function changeTab(){
 	var index=DOM.getIndex(this);
-	alert(index);
+	//alert(index);
+	this.className="tab selectedTab";//让自己加上“选中”的样式
+	//接下来让它的“哥哥们”和“弟弟们”去掉“选中”的样式，只保留默认样式
+	
+	//1.先操作“哥哥们”
+	var prev=this.previousSibling;
+	while(prev){
+		if(prev.nodeType===1){
+			prev.className="tab";
+		}
+		prev=prev.previousSibling;
+	}
+	
+	//2.再操作弟弟们
+	var next =this.nextSibling;
+	while(next){
+		if(next.nodeType===1){
+			next.className="tab";	
+		}
+		next=next.nextSibling;
+	}
 }
+
 
 </script>
