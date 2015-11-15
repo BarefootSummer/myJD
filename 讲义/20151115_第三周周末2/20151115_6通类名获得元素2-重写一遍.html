@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<ul>
+		<li class=" selectedTab  tab">选项一 </li>
+        <li class="tab">选项二</li>
+        <li class="tab">选项三 </li>
+        <p class="content">ppppp</p>
+        <li class="tab">选项四</li>
+         <p class="content">ppppp</p> 
+         <div>div</div>
+          <div>div</div>
+           <div>div</div>
+         <p class="content">ppppp</p>
+        <li class="tab">选项五 </li>
+        
+        <li class="tab selectedTab promoted content">选项一 </li>
+        <li class="tab">选项二</li>
+        <li class="tab">选项三 </li>
+        <p class="content">ppppp</p>
+        <li class="tab">选项四</li>
+         <p class="content">ppppp</p> 
+         <div>div</div>
+          <div class="tab">div,tab</div>
+           <div>div</div>
+         <p class="content">ppppp</p>
+        <li class="tab">选项五 </li>
+</ul>
+</body>
+</html>
+<script src="DOM.js"></script>
+<script>
+var strClass="content";
+//先写一个用匹配类名的正则
+var reg=/(^| )strClass( |$)/;//直接量没办法写变量，一次性就写死了
+var reg=eval("/(^| )"+strClass+"( |$)/");//这样也行
+var reg=new RegExp("(^| )"+strClass+"( |$)");//构造函数的方式更灵活
+
+//然后再通过这个正则去匹配元素的className属性
+var a=[];
+var eles=document.getElementsByTagName("*");
+for(var i=0;i<eles.length;i++){
+	var ele=eles[i];
+	if(reg.test(ele.className)){
+		a.push(ele);	
+	}
+}
+
+function byClass(strClass,eles){
+	//var eles=document.getElementsByTagName("*");	
+	var reg=new RegExp("(^| )"+strClass+"( |$)");
+	var a=[];
+	for(var i=0;i<eles.length;i++){
+		var ele=eles[i];
+		if(reg.test(ele.className)){
+			a.push(ele);	
+		}
+	}
+	return a;
+}
+
+document.getElementsByClassName("content tab promoted");//获得类名同时是content,tab和promoted的元素
+document.querySelectorAll(".content.tab.promoted");//功能同上
+var strClass2=" content   tab   promoted  ";
+var regTrim=/^ +| +$/g;
+strClass2=strClass2.replace(regTrim,"");
+//var aClass=strClass2.split(" ");
+var aClass=strClass2.split(/ +/);
+var eles=document.getElementsByTagName("*");
+/*
+	//下面这三行是基本的逻辑
+	eles=byClass(aClass[0],eles);
+	eles=byClass(aClass[1],eles);
+	eles=byClass(aClass[2],eles);
+
+*/
+//通过上面的逻辑，归纳出一个循环来
+for(var i=0;i<aClass.length;i++){
+	eles=byClass(aClass[i],eles);//传进去的参数和返回值更新的变量相同，是这儿的一个技巧。要不然循环没法进行
+	//eles在本次筛选之前，是筛选的范围。
+	//每次筛选完成之后，再把筛选结果更新这个同名变量，使其成为下筛选的新的范围
+	//本次筛选结果，是下次筛选的范围
+}
+
+
+//以下是用来测试结果的代码
+for(var i=0;i<eles.length;i++){
+	eles[i].style.backgroundColor="red";	
+}
+</script>
