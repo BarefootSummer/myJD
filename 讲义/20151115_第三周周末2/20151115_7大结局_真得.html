@@ -12,7 +12,7 @@
 
 .tabbedPanels li.selectedTab{ background:#CCC; font-weight:bold; color:darkBlue;}
 .tabbedPanels div.selectedContent{ display:block; background:#ccc;}
-
+.promoted{ color:red; font-size:16px; font-weight:bold;}
 </style>
 </head>
 
@@ -22,7 +22,7 @@
     	<li class="tab selectedTab">选项一 </li>
         <li class="tab">选项二</li>
         <li class="tab">选项三 </li>
-        <li class="tab">选项四</li>
+        <li class="tab promoted">选项四</li>
         <li class="tab">选项五 </li>
         
     </ul>
@@ -259,49 +259,34 @@
 </html>
 <script src="DOM.js"></script>
 <script>
-var oLis=document.getElementsByClassName("tab");
-var oLis=document.querySelectorAll("li.tab");//选择器风格的DOM查找方法
+var oLis=DOM.getElesByClass("tab");
 for(var i=0;i<oLis.length;i++){
 	
-	oLis.item(i).onclick=changeTab;
-	//一定要理解行为本身，和行为发生
-	
+	oLis[i].onclick=changeTab;	
 }
-//changeTab是完成选项卡切换的核心方法
-//首先实现的第一步：让changeTab方法自己来获得当前被点击的li的索引号
 function changeTab(){
 	var index=DOM.getIndex(this);
-	//alert(index);
-	this.className="tab selectedTab";//让自己加上“选中”的样式
-	//接下来让它的“哥哥们”和“弟弟们”去掉“选中”的样式，只保留默认样式
-	
-	/* //这里的是基本步骤
-	//1.先操作“哥哥们”
-	var prev=this.previousSibling;
-	while(prev){
-		if(prev.nodeType===1){
-			prev.className="tab";
-		}
-		prev=prev.previousSibling;
-	}
-	
-	//2.再操作弟弟们
-	var next =this.nextSibling;
-	while(next){
-		if(next.nodeType===1){
-			next.className="tab";	
-		}
-		next=next.nextSibling;
-	}*/
+	//this.className="tab selectedTab";//让自己加上“选中”的样式
+	DOM.addClass(this,"selectedTab");
 	
 	//以下是使用封装好的DOM.siblings方法的方式
 	var siblings=DOM.siblings(this);
 	for(var i=0;i<siblings.length;i++){
-		siblings[i].className="tab";	
+		//siblings[i].className="tab";
+		DOM.removeClass(siblings[i],"selectedTab");	
 	}
+	
+	
+	var contents=DOM.children(DOM.next(this.parentNode),"div");
+	
+	for(var i=0;i<contents.length;i++){
+		//contents[i].className="content";
+		DOM.removeClass(contents[i],"selectedContent");	
+	}
+	
+	//contents[index].className="content selectedContent";
+	DOM.addClass(contents[index],"selectedContent");
+
 }
-
-
-
 
 </script>
