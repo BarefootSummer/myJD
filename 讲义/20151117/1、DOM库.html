@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>常用操作DOM的相关类库</title>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<div></div>
+<div></div>
+<div></div>
+
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript">
+    //    //传递一个样式类名:只要包含"w1"这个样式类名的都获取到
+    //    console.log(document.getElementsByClassName("w1"));
+    //    //传递多个样式类名:即包含w1也包含w3的(中间多个空格和顺序颠倒都不影响)
+    //    console.log(document.getElementsByClassName("w3 w1"));
+
+    //console.log(utils.getElementsByClass("  w3    w1 w2"));
+
+    var oDiv1 = document.getElementById("div1");
+    var oDiv2 = document.getElementById("div2");
+
+    utils.css(oDiv1, "width", 200);
+    utils.css(oDiv1, "height", 200);
+    utils.css(oDiv1, "opacity", 0.1);
+    utils.css(oDiv1, "float", "left");
+    utils.css(oDiv1, "backgroundColor", "red");
+
+    utils.css(oDiv2, "width", 200);
+    utils.css(oDiv2, "height", 200);
+    utils.css(oDiv2, "opacity", 0.1);
+    utils.css(oDiv2, "float", "left");
+    utils.css(oDiv2, "backgroundColor", "red");
+
+    console.log(utils.css(oDiv1,"backgroundColor"));
+
+
+
+    //框架(类库)
+    //jQuery:提供了我们项目中常用的一些操作DOM、数组、Ajax等方法(把兼容性都处理好了,我们以后做项目只需要引入这个类库,直接的使用里面的方法即可)-->不针对于任何的项目,我们都可以使用的
+
+    //UI框架
+    //bootstrap:CSS+JS都封装成一体的框架 http://www.bootcss.com/ 我们只需要引入它的CSS+JS，并且按照规定把我们的HTML结构写好，那么连带样式和JS操作效果的功能都实现了
+
+    //插件
+    //jQuery.validate.js:表单验证插件 ->具体应用于某一个业务,例如有专门处理轮播图的插件,也有专门处理拖拽的插件
+</script>
+</body>
+</html>

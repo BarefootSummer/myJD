@@ -92,16 +92,16 @@
 
     //异步:拿定时器来说,在等待执行的时间,我们继续执行下面的代码,并且只有等下面的代码执行完成后,才会返回头看定时器是否到达时间了
     //设置定时器,10ms后执行,在这个等待的时间内,我们继续执行下面的代码,不管下面需要多长时间,都是把下面所有的代码(同步执行的代码)都执行完成,才会返回看定时器是否到达时间
-    var count = 0;
-    var timer = window.setTimeout(function () {
-        count++;
-        console.log(count);
-    }, 10);
-    //执行需要100ms
-    var i = 0;
-    while (i < 1000000) {
-        i++;
-    }
+//    var count = 0;
+//    var timer = window.setTimeout(function () {
+//        count++;
+//        console.log(count);
+//    }, 10);
+//    //执行需要100ms
+//    var i = 0;
+//    while (i < 1000000) {
+//        i++;
+//    }
     //JS都是单线程的
 </script>
 </body>

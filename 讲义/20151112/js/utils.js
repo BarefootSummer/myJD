@@ -22,8 +22,8 @@ var utils = {
         var offsetP = curEle.offsetParent, l = curEle.offsetLeft, t = curEle.offsetTop;
         while (offsetP) {
             if (navigator.userAgent.indexOf("MSIE 8.0") < 0) {
-                l += offsetP.clientLeft;
-                t += offsetP.clientTop;
+                l += offsetP.clientLeft;   l=l+offsetP.clientLeft;
+                t += offsetP.clientTop;    t=t+offsetP.clientTop;
             }
             l += offsetP.offsetLeft;
             t += offsetP.offsetTop;
