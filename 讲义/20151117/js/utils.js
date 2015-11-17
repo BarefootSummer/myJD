@@ -158,7 +158,7 @@ _utils.css = function css(curEle, attr, value) {
         var val = "getComputedStyle" in window ? window.getComputedStyle(curEle, null)[attr] : curEle.currentStyle[attr];
         return reg.test(val) ? parseFloat(val) : val;
     }
-    
+
     //set style
     reg = /^(width|height|top|left|right|bottom|((margin|padding)(Left|Top|Right|Bottom)?))$/;
     if (attr === "opacity") {
