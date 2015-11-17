@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>常用操作DOM的相关类库</title>
+    <style type="text/css">
+
+    </style>
 </head>
 <body>
-<div class="w1 w2 w3"></div>
-<div class="w1 w3"></div>
-<div class="w1 w2"></div>
-<div class="w2 w3"></div>
-<div class="w1 w2 w3"></div>
+<div id="div1"></div>
+<div id="div2"></div>
+<div></div>
+<div></div>
+<div></div>
 
 <script type="text/javascript" src="js/utils.js"></script>
 <script type="text/javascript">
@@ -18,7 +21,25 @@
     //    //传递多个样式类名:即包含w1也包含w3的(中间多个空格和顺序颠倒都不影响)
     //    console.log(document.getElementsByClassName("w3 w1"));
 
-    console.log(utils.getElementsByClass("  w3    w1 w2"));
+    //console.log(utils.getElementsByClass("  w3    w1 w2"));
+
+    var oDiv1 = document.getElementById("div1");
+    var oDiv2 = document.getElementById("div2");
+
+    utils.css(oDiv1, "width", 200);
+    utils.css(oDiv1, "height", 200);
+    utils.css(oDiv1, "opacity", 0.1);
+    utils.css(oDiv1, "float", "left");
+    utils.css(oDiv1, "backgroundColor", "red");
+
+    utils.css(oDiv2, "width", 200);
+    utils.css(oDiv2, "height", 200);
+    utils.css(oDiv2, "opacity", 0.1);
+    utils.css(oDiv2, "float", "left");
+    utils.css(oDiv2, "backgroundColor", "red");
+
+    console.log(utils.css(oDiv1,"backgroundColor"));
+
 
 
     //框架(类库)
