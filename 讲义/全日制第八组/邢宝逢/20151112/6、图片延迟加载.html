@@ -18,6 +18,7 @@
 
 <!--trueImg是我们自己定义的一个属性,里面存储的是我们真实图片的地址,而我们默认给img设置的是默认图的地址-->
 <img id="img1" src="img/default.jpg" trueImg="https://img.alicdn.com/tps/TB1ogPgKpXXXXXlXpXXXXXXXXXX-520-280.jpg"/>
+<!--src存储的是现在页面上图片的地址  tureImg表示我们想让图片改变后的图片的地址-->
 
 <script type="text/javascript" src="js/utils.js"></script>
 <script type="text/javascript">
@@ -25,52 +26,56 @@
     //开始展示的是默认图(loading等待图),过一段时间才会加载真实的图片
 
     //1)当页面加载完成的时候
-    //window.onload也可以
-    //    window.setTimeout(function () {
-    //        var pic = document.getElementById("img1");
-    //        var trueImg = pic.getAttribute("trueImg");
+    //window.onload也可以/*页面加载完之后立即执行一段javascript代码*/
+    //        window.setTimeout(function () {/*绑定了一个只能执行一次函数的定时器*/
+    //            var pic = document.getElementById("img1");
+    //            var trueImg = pic.getAttribute("trueImg");/*img1 的属性名的属性值tureImg*/
+    //        /*getAttribute 表示指定属性名的属性值 因为此处trueImg是自定义的的一个属性*/
     //        //验证我们的真实图片是否可以正常的加载
-    //        var oImg = new Image;//->document.createElement("img")
-    //        oImg.src = trueImg;
-    //        oImg.onload = function () {
-    //            //把图片src赋值一个地址,浏览器开始加载这张图片,如果当前的图片可以正常的加载就会触发我们的onload事件
-    //            pic.src = this.src;
-    //            alert("呵呵呵");//->2
-    //        };
-    //        alert("哈哈哈");//->1
-    //    }, 1000);
+    //            var oImg = new Image;//->document.createElement("img") /*新创建了一个图片标签*/
+    //            oImg.src = trueImg; /*把真正的照片的地址存放到里面*/
+    //            oImg.onload = function () {/*等新的img标签加载完成后执行后面的函数*/
+    //        //把图片src赋值一个地址,浏览器开始加载这张图片,如果当前的图片可以正常的加载就会触发我们的onload事件
+    //                pic.src = this.src;
+    //                alert("呵呵呵");//->2/*后输出*/
+    //            };
+    //            alert("哈哈哈");//->1/*先输出*/
+    //        }, 1000);
 
     //oImg.onload=function(){} 是异步加载的,在图片加载的过程中继续执行下面的代码... ->所有的定时器都是异步加载的，同样所有的事件绑定也是异步加载的
     //思考题：用异步编程的思想回去分析免费课的选项卡循环绑定事件
 
-    //2)当页面加载到指定区域的时候，在展示真实的图片
-    //当我们滚动页面的时候，图片已经完全的看见了(后者你也可以在一露头的时候)我们在加载真实的图片地址
-
+    //    //2)当页面加载到指定区域的时候，在展示真实的图片
+    //    //当我们滚动页面的时候，图片已经完全的看见了(后者你也可以在一露头的时候)我们在加载真实的图片地址
+    //
     var oPic = document.getElementById("img1");
-
-    //获取当前图片距离body这个参照物的上偏移量
+    //
+    //    //获取当前图片距离body这个参照物的上偏移量
     var offT = utils.offset(oPic).top;
-    //获取当前图片的本身高度
+    //    //获取当前图片的本身高度
     var curH = oPic.offsetHeight;
-    //获取当前屏幕的高度
+    //    //获取当前屏幕的高度
     var winH = document.documentElement.clientHeight || document.body.clientHeight;
-
-    //当页面滚动的时候，达到一定的条件的时候加载我们的真实图片
-    //条件:curH+offT<=scrollTop+winH
+    //
+    //    //当页面滚动的时候，达到一定的条件的时候加载我们的真实图片
+    //    //条件:curH+offT<= scrollTop+winH
     window.onscroll = function () {
-        if (!oPic.isLoad) {
+        if (!oPic.isLoad) {/*isLoad是一个自定义属性初始值是undefined ！取反就是ture 就执行*/
             var winT = document.documentElement.scrollTop || document.body.scrollTop;
             if (curH + offT <= winT + winH) {
                 var oImg = new Image;
+                /*创建一个新的照片实例*/
                 oImg.src = oPic.getAttribute("trueImg");
                 oImg.onload = function () {
+                    /*当新的图片加载完成之后就把加载过的地址给原来的地址这样原来图片就改变了*/
                     oPic.src = this.src;
                     oPic.isLoad = true;//记录一个标识,代表当前的图片已经加载完成了
+                    /*加载完成后就是true在滚动的时候就不执行函数体内的代码了*/
                 }
             }
         }
     };
-    //以上代码预有问题:只要页面滚动,scroll事件就会触发,触发就会执行里面的代码,执行里面的代码只要条件符合就会一直的给这张图片从新的赋值（不管之前是否已经加载了） -->在图片真实地址已经加载完成的时候,我们在滚动的时候就不让他从新加载了
+    //    //以上代码有问题:只要页面滚动,scroll事件就会触发,触发就会执行里面的代码,执行里面的代码只要条件符合就会一直的给这张图片从新的赋值（不管之前是否已经加载了） -->在图片真实地址已经加载完成的时候,我们在滚动的时候就不让他从新加载了
 
 
 </script>

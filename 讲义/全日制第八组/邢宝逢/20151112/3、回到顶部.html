@@ -13,24 +13,24 @@
             width: 100%;
             height: 1000%;
             background: #ffeedd;
-            background: -webkit-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
+            background: -webkit-linear-gradient(top, #ffeedd, #FFCF78, #31ce35);
             background: -moz-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
             background: -ms-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
             background: -o-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
             background: linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
         }
 
-        #div1 {
-            position: fixed;
-            top: 50px;
-            left: 10px;
-            width: 80%;
-            height: 50px;
-            line-height: 50px;
-            text-align: center;
-            background: #008000;
-            color: #fff;
-        }
+        /*#div1 {*/
+            /*position: fixed;*/
+            /*top: 50px;*/
+            /*left: 10px;*/
+            /*width: 80%;*/
+            /*height: 50px;*/
+            /*line-height: 50px;*/
+            /*text-align: center;*/
+            /*background: #008000;*/
+            /*color: #fff;*/
+        /*}*/
 
         #goTo {
             display: none;
@@ -68,7 +68,8 @@
     //获取当前浏览器一屏幕的高度
     var curH = document.documentElement.clientHeight || document.body.clientHeight;
 
-    //当我们页面滚动的时候,我们获取当前浏览器卷去的高度,如果高度大于curH,让我们的goTo显示,反之让goTo隐藏~~
+    //当我们页面滚动的时候,我们获取当前浏览器卷去的高度,如果高度大于curH,让我们的goTo显示
+//,反之让goTo隐藏~~
     window.onscroll = function () {
         var curT = document.documentElement.scrollTop || document.body.scrollTop;
         goTo.style.display = curT >= curH ? "block" : "none";
