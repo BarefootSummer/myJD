@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/><!--移动端前面必须加这个标头-->
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
     <title>图片延迟加载</title>
     <style type="text/css">
         body, div, span, ul, li, h2, p {
@@ -33,12 +33,15 @@
             position: absolute;
             width: 75px;
             height: 60px;
+            background: url("img/default.jpg") no-repeat;
+            background-size: 100% 100%;
         }
 
         #newsList li .logo img {
             width: 100%;
             height: 100%;
             border: none;
+            opacity: 0;
         }
 
         #newsList li .title {
@@ -70,9 +73,9 @@
 <script type="text/javascript" src="js/json.js"></script>
 <script type="text/javascript">
     var newsList = document.getElementById("newsList");
-    //绑定数据:
+   
     var initData = function () {
-        if (!dataAry) return;  /*判断有没有传入数据 如果没有传则停止执行*/
+        if (!dataAry) return;
         var frg = document.createDocumentFragment();
         for (var i = 0; i < dataAry.length; i++) {
             var curItem = dataAry[i];
@@ -82,10 +85,10 @@
 
             var oLi = document.createElement("li");
             var str = "";
-            str += "<div class='logo'><img src='img/default.jpg' trueImg='" + curItem.logo + "'/></div>";   /*" + curItem.logo + "表示这个属性值里面的属性值变为字符串*/
+            str += "<div class='logo'><img src='img/default.jpg' trueImg='" + curItem.logo + "'/></div>";
             str += "<div class='title'>";
             str += "<h2>" + curItem.title + "</h2>";
-            str += "<p>" + curItem.desc + "</+p>";
+            str += "<p>" + curItem.desc + "</p>";
             str += "</div>";
             oLi.innerHTML = str;
             frg.appendChild(oLi);
@@ -94,14 +97,14 @@
     };
     initData();
 
-    //2、编写图片延迟加载的方法
+   
     var winH = document.documentElement.clientHeight || document.body.clientHeight;
 
     var loadImg = function () {
         var winT = document.documentElement.scrollTop || document.body.scrollTop;
         var imgList = newsList.getElementsByTagName("img");
-        for (var i = 0; i < imgList.length; i++) {/*多张图片*/
-            //闭包的方式解决的是oImg.onload是异步加载的
+        for (var i = 0; i < imgList.length; i++) {
+            
             ~function (i) {
                 var curImg = imgList[i];
                 if (!curImg.isLoad) {
@@ -111,9 +114,9 @@
                         var oImg = new Image;
                         oImg.src = curImg.getAttribute("trueImg");
                         oImg.onload = function () {
-                        /*如果不加前面的自执行函数 此处是异步加载的*/
                             curImg.src = this.src;
                             curImg.isLoad = true;
+                            move(curImg);
                         }
                     }
                 }
@@ -121,7 +124,19 @@
         }
     };
 
-    //进入页面,加载完成数据后,1s后在加载真实图片或者滚动的时候加载真实的图片
+    
+    function move(curImg) {
+        var count = 0;
+        var timer = window.setInterval(function () {
+            count += 0.01;
+            curImg.style.opacity = count;
+            if (count >= 1) {
+                window.clearInterval(timer);
+            }
+        }, 10);
+    }
+
+   
     window.setTimeout(loadImg, 1000);
     window.onscroll = loadImg;
 </script>
