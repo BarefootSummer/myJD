@@ -11,7 +11,7 @@
 
         html, body {
             width: 100%;
-            height: 1000%;
+            height: 500%;
             background: #ffeedd;
             background: -webkit-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
             background: -moz-linear-gradient(top, #ffeedd, #FFCF78, #08BECE);
@@ -74,7 +74,7 @@
     //当我们页面滚动的时候,我们获取当前浏览器卷去的高度,如果高度大于curH,让我们的goTo显示,反之让goTo隐藏~~
     function scrollMove() {
         var curT = getWin("scrollTop");
-        goTo.style.display = curT >= curH ? "block" : "none";
+        goTo.style.display = curT > curH ? "block" : "none";
     }
     window.onscroll = scrollMove;/*绑定滚动事件*/
 
