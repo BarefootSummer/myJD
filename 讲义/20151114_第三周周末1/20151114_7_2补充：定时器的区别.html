@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+fnn1=0;
+fnn2=0;
+var timer;
+function fn1(){
+	clearTimeout(timer)
+	fnn1++;
+	console.log(fnn1);
+	timer=window.setTimeout(fn1,500);
+	
+	
+}
+
+function fn2(){
+	fnn2++;
+	console.log(fnn2);
+	window.setInterval(fn2,500);
+}
+//分析fn2的执行
+//第二次：又开起了一个fn2，这个fn2里又有一个定时器，这个定时器每隔500毫秒再重复此操作
+//2的n次方次运行，n=时间长度/500
+
+//如果想让一个方法按固定的时间单次运行，还用setInterval
+function fn3(){
+	//省略若干行代码
+}
+
+window.setInterval(fn3,500);//这样实现和fn1的相同功能
+</script>

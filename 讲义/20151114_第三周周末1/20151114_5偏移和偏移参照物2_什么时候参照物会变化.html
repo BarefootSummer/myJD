@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<div id="div1" style="width:300px; height:300px; background:green; z-index:2; position:relative; margin-top:50px;">
+	layout的概念：一般情况下，写了定位：relative,absolute,fixed之后，layout会发现变化，会形成新的层级，这会再去写z-index属性才起作用。同样，每次形成新的层级，也会形成一个新的offsetParent,也就是说每个盒子的偏移都是以当前的这个层级做的偏移。
+</div>
+<div id="div2" style="width:200px; height:200px; background:red; margin-top:-100px; margin-left:100px; z-index:-1;   ">
+
+
+</div>
+
+
+
+<div id="outer" style=" position:relative; height:300px; background:#ccc; clear:both;  width:1000px;">
+	<div id="inner" style="width:400px; background:green; float:right; height:250px; margin:20px 0; position:relative">
+    	<p id="p1" style=" background:red;   width:200px; height:200px; float:left; position:relative; margin:20px;"> 
+        	<a  id="a1"href="###" style="float:right; margin: 20px; background:yellow;">计算此超链接距离浏览器的偏移</a>
+        </p>
+    </div>
+
+</div>
+</body>
+</html>
+<script>
+	alert(a1.offsetParent.offsetParent.offsetParent.offsetLeft)//8,body默认的padding是8
+//计算a1距离浏览器的偏移量
+//1、先算出a1距离p1的偏移
+	var n=a1.offsetLeft
+//2、再算出p1到inner的偏移
+	n+=a1.offsetParent.offsetLeft;//n+=p1.offsetLeft
+//3、再算出inner到outer的偏移
+	n+=a1.offsetParent.offsetParent.offsetLeft;//n+=inner.offsetLeft;
+//4、最后算出outer到body的偏移
+	n+=a1.offsetParent.offsetParent.offsetParent.offsetLeft;
+	//相当于n+=outer.offsetLeft;
+//最后算到body不要再计算了，再累加一次也不为错，只不过就是累加一次0了
+
+function offset(ele){
+	var l=ele.offsetLeft;
+	var p=ele.offsetParent;
+	while(p){
+		l+=p.offsetLeft;
+		p=p.offsetParent;
+	}
+	return l;
+}
+
+
+
+
+</script>

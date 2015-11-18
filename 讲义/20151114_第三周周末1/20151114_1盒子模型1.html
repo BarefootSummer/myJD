@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+#div1{ width:400px; height:200px; padding:100px; border:20px green solid; background:red; margin:30px;}
+</style>
+</head>
+
+<body>
+<div style="" id="div1"></div>
+</body>
+</html>
+<script>
+//clientWidth,clientHeight,offsetWidth,offsetHeight
+//clientWidth和offsetWidth的区别在那儿：带不带border
+//div1.offsetWidth=700;
+//div1.clientWidth=700;
+//盒子模型是干嘛的？计算盒子大小的模型：
+//内容+padding+border+margin;
+//div1.style.width这样的方式只能获得行内样式的值
+//window.getComputedStyle(div1,null)
+//参数一指定要计算的元素，参数是计算这个元素指定的伪元素样式。如果第二个参数是null表示不计算指定的伪类样式
+//返回值是一个对象：是这个元素样式集合，是cssstyleDeclaration
+
+//JS的顶级作用域是global,以下方法就可能不是window的属性
+//Number,String
+//JSON
+//encodeURI
+
+//window===process
+//ECMA 语法
+//BOM--window DOM--document  process
+//言语道断，心行处灭 
+
+//window.getComputedStyle(div1,null).width;
+//currentStyle//属性，IE6/7/8,性质和getComputedStyle是一样的
+
+
+function getCss(ele,attr){
+	//ele是元素，attr是css属性
+	if(window.getComputedStyle){
+		return window.getComputedStyle(ele)[attr]
+		
+	}else{
+		return ele.currentStyle[attr]
+	}
+}
+
+function getCss(ele,attr){
+	//ele是元素，attr是css属性
+	/*
+		a=9;
+		alert(b);
+		if(c);
+		一个变量未定义，可以写操作（可以赋值操作），但是不可以读操作。但是一个未定义的变量，可以用typeof去操作，可以当成一个属性来做读或判断的操作
+		typeof d  === "undefined"
+
+	number,
+	var n	= 9;
+	int n = 1
+	*/
+	//if(getComputedStyle)//如果运行在IE6-8，这样是错误的用法,语法错误
+	//if(undefined)
+	
+	//强化理解：未定义的异常和undefined本身不是一回事
+	
+	
+	if(typeof getComputedStyle =="function"){
+		return window.getComputedStyle(ele)[attr]
+		
+	}else{
+		return ele.currentStyle[attr]
+	}
+}
+
+
+function getCss(ele,attr){
+	try{
+		return getComputedStyle(ele,null)[attr];
+	}catch(e){
+		return ele.currentStyle[attr];
+	}
+}
+alert(getCss(div1,"width"));
+
+
+
+
+
+
+
+
+
+
+</script>
