@@ -540,5 +540,3 @@ BOM.parseQueryStr=function (str){
 		}
 	return obj;
 }
-
-
