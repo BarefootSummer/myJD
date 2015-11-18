@@ -1,4 +1,4 @@
-/*
+                                                                                        /*
  * utils(v1.0): Which contains the common method of operating DOM
  * by Team on 2015/11/17
  */
