@@ -394,7 +394,7 @@
         });
         return obj;
     };
-    
+
     //myExecAll：Capture all of the required content in a one-time capture
     regPro.myExecAll = function myExecAll(str) {
         var reg = !this.global ? eval(this.toString() + "g") : this;
