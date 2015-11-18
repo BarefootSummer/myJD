@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body, div {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1 {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            background: #008000;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+
+<script charset="utf-8" type="text/javascript" src="js/utils-1.0.min.js"></script>
+<script type="text/javascript">
+    var oDiv = document.getElementById("div1");
+    var target = utils.win("clientWidth") - oDiv.offsetWidth;
+    //我们使用的是setTimeout实现基本的运动动画(我们一般在项目中都使用setTimeout,因为这个控制起来更加的灵活一些)
+    function move() {
+        window.clearTimeout(oDiv.timer);
+        var curL = utils.css(oDiv, "left");
+        if (curL >= target) {
+            return;
+        }
+        utils.css(oDiv, "left", curL + 5);
+        oDiv.timer = window.setTimeout(move, 13);
+    }
+    move();
+    //我们使用的是setInterval实现基本的运动动画
+    //    var timer = window.setInterval(function () {
+    //        //定时器绑定的方法中的this->window
+    //        var curL = utils.offset(oDiv).left;
+    //        if (curL >= target) {
+    //            window.clearInterval(timer);
+    //            return;
+    //        }
+    //        utils.css(oDiv, "left", curL + 5);
+    //    }, 13);
+</script>
+<script type="text/javascript">
+    //动画:在一段时间内，从当前位置运动到目标位置
+    //总距离：结束位置-起始位置  ->结束位置:target  起始位置:current
+    //总时间：多长时间完成我们的动画 -> duration
+    //步长：每一步走多远 -> step
+    //速度: 多长时间走一步 -> interval
+    //运动的方式：linear匀速 ease-in加速 ease-out减速 ease-in-out先加速后减速...
+    //1、起始和结束位置定了,步长也确定了,总时间不定
+    //2、起始和结束位置定了,归定了总时间,也知道了速度->步长不定(需要求出步长)
+
+    //加速/减速动画:
+    //我们可以让步长逐步的增大
+    //也可以让定时器的时间因子逐步的减少
+</script>
+</body>
+</html>
