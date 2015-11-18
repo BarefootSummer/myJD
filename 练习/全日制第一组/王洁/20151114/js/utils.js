@@ -1,7 +1,6 @@
 var utils = {
-
     toJSON: function (str) {
-        return "JSON" in window ? JSON.parse(str) : eval("(" + str + ")");
+        return "Json" in window ? JSON.parse(str) : eval("(" + str + ")");
     },
     listToArray: function (likeAry) {
         var ary = [];
@@ -15,21 +14,22 @@ var utils = {
         return ary;
     },
     getCss: function (curEle, attr) {
-        var reg = /^[+-]?(\d|[1-9]\d+)(\.\d+)?(px|pt|em|rem)$/, val = null;
+        var reg = /^[+-]?(\d|[1-9]\d+)(\.\d+)?(px|em|rem|pt)$/g, val = null;
         val = "getComputedStyle" in window ? window.getComputedStyle(curEle, null)[attr] : curEle.currentStyle[attr];
         return reg.test(val) ? parseFloat(val) : val;
     },
     offset: function (curEle) {
-        var offsetP = curEle.offsetParent, l = curEle.offsetLeft, t = curEle.offsetTop;
-        while (offsetP) {
+        var p = curEle.offsetParent, l = curEle.offsetLeft, t = curEle.offsetTop;
+        while (p) {
             if (navigator.userAgent.indexOf("MSIE 8.0") < 0) {
-                l += offsetP.clientLeft;   l=l+offsetP.clientLeft;
-                t += offsetP.clientTop;    t=t+offsetP.clientTop;
+                l += p.clientLeft;
+                t += p.clientTop;
             }
-            l += offsetP.offsetLeft;
-            t += offsetP.offsetTop;
-            offsetP = offsetP.offsetParent;
+            l += p.offsetLeft;
+            t += p.offsetTop;
+            p = p.offsetParent;
         }
         return {top: t, left: l};
     }
+
 };
