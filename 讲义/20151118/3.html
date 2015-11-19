@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body, div {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1 {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background: #008000;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+
+<script charset="utf-8" type="text/javascript" src="js/utils-1.0.min.js"></script>
+<script type="text/javascript">
+    //    var oDiv = document.getElementById("div1");
+    //    var t = utils.win("clientWidth") - oDiv.offsetWidth;
+    //    move.call(oDiv, t);
+    //
+    //    function move(target) {
+    //        var _this = this;
+    //        window.clearTimeout(_this.timer);
+    //        ~function _move() {
+    //            window.clearTimeout(_this.timer);
+    //            var curL = utils.css(_this, "left");
+    //            if (curL < target) {
+    //                if (curL + 8 >= target) {
+    //                    utils.css(_this, "left", target);
+    //                    move.call(_this, 0);
+    //                    return;
+    //                }
+    //                utils.css(_this, "left", curL + 8);
+    //            } else if (curL > target) {
+    //                if (curL - 8 <= target) {
+    //                    utils.css(_this, "left", target);
+    //                    move.call(_this, t);
+    //                    return;
+    //                }
+    //                utils.css(_this, "left", curL - 8);
+    //            } else {
+    //                return;
+    //            }
+    //            _this.timer = window.setTimeout(_move, 13);
+    //        }();
+    //    }
+
+    //松松的思想
+    var oDiv = document.getElementById("div1");
+    var target = utils.win("clientWidth") - oDiv.offsetWidth;
+
+    function move() {
+        window.clearTimeout(oDiv.timer);
+        var curL = utils.css(oDiv, "left");
+        if (curL >= target) {
+            oDiv.isTrue = true;
+        }
+        if (!oDiv.isTrue) {
+            utils.css(oDiv, "left", curL + 5);
+        } else {
+            utils.css(oDiv, "left", curL - 5);
+            if (curL <= 0) {
+                oDiv.isTrue = false;
+            }
+        }
+        oDiv.timer = window.setTimeout(move, 13);
+    }
+    move();
+
+
+</script>
+</body>
+</html>

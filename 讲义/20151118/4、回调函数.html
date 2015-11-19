@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //    window.setTimeout(function(){
+    //        //this->window
+    //        console.log(this);
+    //    },0);
+
+    //forEach -> 数组中用来遍历数组中每一项的一个方法,在IE6~8下不兼容的
+    //1)数组中有多少项,当前第一个参数[function]就执行多少次
+    //2)第一个参数不仅执行,而且还有三个参数值：
+    //item:数组中的每一项
+    //index:数组中每一项对应的索引
+    //input:原始的数组
+    //3)第一个参数函数执行的时候,里面的this默认是window
+    //4)forEach还可以传递第二个参数,第二个参数的意思就是修改第一个参数(函数)中的this关键字的
+    //    var ary = [12, 23, 34, 45];
+    //    var res = ary.forEach(function (item, index, input) {
+    //
+    //    });
+    //    console.log(res, ary);
+
+    //map:和forEach方法一样都是循环数组中的每一项的,只不过map是支持返回值的
+    //不管是map还是forEach对原来的数组都不发生改变
+    //1)forEach只是遍历数组中的每一项,但是它不支持返回值,换句话说,不能通过return的方式修改原来的每一项
+    //2)map中return的是啥,都相当于把当前数组中的这一项修改为return的内容
+    //    res = ary.map(function (item, index, input) {
+    //        return item + 10;
+    //    });
+    //    console.log(res, ary);
+
+    //在不需要考虑IE兼容的情况下(移动端开发),我们经常的使用forEach/map
+    //原理和我们第二周讲的借用数组的方法实现将类数组转换为数组是一模一样的
+    //    var oLis = document.getElementsByTagName("li");
+    //    [].forEach.call(oLis, function (item, index, input) {
+    //
+    //    });
+
+    //以下所有我们学过的方法都有一个共同的特性：把函数定义的部分当做一个参数传递到另外一个方法中执行 -->回调函数
+    //    var ary=[];
+    //    ary.sort(function(){});
+    //    ary.forEach(function(){});
+    //
+    //    var str="";
+    //    str.replace(/^.$/,function(){});
+    //
+    //    window.setTimeout(function(){},0);
+    //    //...
+
+    //回调函数的原理:把fn1当做一个参数传递给我们的fn2,在fn2执行的时候,我们可以在fn2函数体中的任何位置来执行我们的fn1
+    //    function fn1(num1, num2) {
+    //        console.log("fn1");
+    //        //this->window
+    //    }
+    //    function fn2(callBack) {
+    //        console.log("fn2");
+    //        callBack(100, 200);//callBack->fn1
+    //    }
+    //    fn2(fn1);
+
+    //重写数组的forEach,实现IE6~8下的兼容
+    Array.prototype.myForEach = function myForEach(callBack, context) {
+        context = context || window;
+        if (typeof callBack !== "function") return;
+        //判断是否兼容forEach,兼容的话直接的使用内置的
+        if ("forEach" in Array.prototype) {
+            this.forEach(callBack, context);
+            return;
+        }
+        //不兼容的话我们自己for循环进行处理
+        for (var i = 0; i < this.length; i++) {
+            //每一次循环都执行传递进来的回调函数callBack,并且让里面的this变为context,而且还要给这个函数传递三个参数的值:当前项,当前项的索引,原始数组
+            callBack.call(context, this[i], i, this);
+        }
+    };
+
+    [12, 23, 34, 45].myForEach(function (item, index, input) {
+
+    });
+</script>
+</body>
+</html>
