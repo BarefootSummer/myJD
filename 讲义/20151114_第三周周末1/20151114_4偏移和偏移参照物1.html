@@ -24,6 +24,8 @@ div{ margin:100px; height:200px; width:200px;  background:red; }
     </div>
 </div>
 <div ></div>
+<div ></div>
+<div ></div>
 </body>
 </html>
 <script>
@@ -44,9 +46,9 @@ div{ margin:100px; height:200px; width:200px;  background:red; }
 
 	//层级发生了改变，既：，写了定位：relative,absolute,fixed之后，layout会发现变化，会形成新的层级，这会再去写z-index属性才起作用。同样，每次形成新的层级，也会形成一个新的offsetParent,也就是说每个盒子的偏移都是以当前的这个层级做的偏移
 	//计算red1距离浏览器的偏移量是下面的写法
-	red1.offsetLeft+red1.offsetParent.offsetLeft
+	console.log(red1.offsetLeft+red1.offsetParent.offsetLeft);
 
-
-
+	alert(document.documentElement.style.clientLeft);
+alert(document.body.style.clientLeft);
 
 </script>

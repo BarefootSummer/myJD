@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body, div, ul, li {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+            font-size: 14px;
+            -webkit-user-select: none; /*禁止点击的时候选中文字*/
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        .tab {
+            margin: 20px auto;
+            width: 500px;
+        }
+
+        .tab ul {
+            position: relative;
+            top: 1px;
+        }
+
+        .tab ul li {
+            float: left;
+            margin-right: 10px;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #08BECE;
+            cursor: pointer;
+        }
+
+        .tab ul li.select {
+            background: #ffe470;
+            border-bottom-color: #ffe470;
+        }
+
+        .tab div {
+            display: none;
+            clear: both; /*清除上面li的浮动对自己的影响*/
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            border: 1px solid #08BECE;
+            background: #ffe470;
+        }
+
+        .tab div.select {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="tab">
+    <ul>
+        <li class="select">电影</li>
+        <li>动漫</li>
+        <li>综艺</li>
+    </ul>
+    <div class="select">007、幽灵档案、指环王</div>
+    <div>海贼王、火影、葫芦娃</div>
+    <div>奔跑吧兄弟、爸爸去哪、快乐大本营</div>
+</div>
+
+<div class="tab">
+    <ul>
+        <li class="select">电影</li>
+        <li>动漫</li>
+        <li>综艺</li>
+    </ul>
+    <div class="select">007、幽灵档案、指环王</div>
+    <div>海贼王、火影、葫芦娃</div>
+    <div>奔跑吧兄弟、爸爸去哪、快乐大本营</div>
+</div>
+
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    //    $("#tab li").click(function () {
+    //        //->获取当前点击的这个li的索引
+    //        var _index = $(this).index();
+    //        //->让当前点击的li有select而它的兄弟都移除select样式
+    //        $(this).addClass("select").siblings().removeClass("select");
+    //        //->获取所有的div，并且遍历,把索引和当前点击li的这个索引相对应的显示select，其余的都移除select
+    //        $("#tab>div").each(function (index, item) {
+    //            if (index === _index) {
+    //                $(this).addClass("select");
+    //            } else {
+    //                $(this).removeClass("select");
+    //            }
+    //        });
+    //    });
+
+    $(".tab").each(function () {
+        var $_this = $(this);
+
+        $_this.find("li").click(function () {
+            var _index = $(this).index();
+            $(this).addClass("select").siblings().removeClass("select");
+            $_this.children("div").each(function (index) {
+                if (_index === index) {
+                    $(this).addClass("select");
+                } else {
+                    $(this).removeClass("select");
+                }
+            });
+        });
+
+    });
+
+
+</script>
+</body>
+</html>

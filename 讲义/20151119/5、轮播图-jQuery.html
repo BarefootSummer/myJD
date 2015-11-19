@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰轮播图</title>
+    <link type="text/css" rel="stylesheet" href="css/banner.css"/>
+</head>
+<body>
+<!--实现无缝轮播图,在HTML结构中我们把第一张图片在放末尾一次-->
+<div class="banner">
+    <div class="bannerImg" id="bannerImg">
+        <img src="img/banner1.jpg" alt=""/>
+        <img src="img/banner2.jpg" alt=""/>
+        <img src="img/banner3.jpg" alt=""/>
+        <img src="img/banner4.jpg" alt=""/>
+        <img src="img/banner1.jpg" alt=""/>
+    </div>
+    <ul class="bannerTip" id="bannerTip">
+        <li class="select">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
+
+<script charset="utf-8" type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script charset="utf-8" type="text/javascript">
+    var $li = $(".bannerTip>li");
+    var $bannerImg = $("#bannerImg");
+
+    var showTip = function () {
+        $li.each(function (index) {
+            index === step ? $(this).addClass("select") : $(this).removeClass("select");
+        });
+    };
+
+    $li.click(function () {
+        window.clearInterval(timer);
+        step = $(this).index();
+        $(this).addClass("select").siblings().removeClass("select");
+        $bannerImg.animate({left: $(this).index() * -1000}, 500, "linear", function () {
+            timer = window.setInterval(autoMove, 4000);
+        });
+    });
+
+    var step = 0;
+    var autoMove = function () {
+        step++;
+        $bannerImg.animate({left: step * -1000}, 500, "linear", function () {
+            if (step >= 4) {
+                step = 0;
+                $(this).css("left", 0);
+            }
+            showTip();
+        });
+    };
+    var timer = window.setInterval(autoMove, 4000);
+
+
+</script>
+</body>
+</html>
