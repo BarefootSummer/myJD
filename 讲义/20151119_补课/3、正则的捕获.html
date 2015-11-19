@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var str = "2015";//->"贰零壹伍"
+    var ary = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
+    var reg = /\d+?/g;
+    str = str.replace(reg, function () {
+        return ary[arguments[0]];
+    });
+    console.log(str);
+
+    //1)function执行几次看的是正则捕获几次,这里是捕获四次,所以我们也执行四次
+    //第一次执行:有三个参数值 (和使用exec捕获的结果是一模一样的)
+    //"2"、0、"2015"
+    //第二次执行:"0"、1、"2015"
+    //...
+
+    //2)函数中return的是什么就相当于用什么把大正则捕获的内容进行替换
+    //    str = str.replace(reg, function () {
+    //        return "~";
+    //    });
+    //str -> "~~~~"
+</script>
+</body>
+</html>

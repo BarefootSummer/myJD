@@ -150,11 +150,12 @@ window.onload=function(){
 		var windowBottom=(document.documentElement.scrollTop||document.body.scrollTop)+(document.documentElement.clientHeight||document.body.clientHeight);
 		for(var i=0;i<oImgs.length;i++){
 			var oImg=oImgs.item(i);
-			if(oImg.posi<windowBottom){
+			if(!oImg.flag&&oImg.posi<windowBottom){
 				var tempImg=new Image;
 				tempImg.src=oImg.getAttribute("realImg")+"?"+Math.random();
 				tempImg.onload=function(){
-					oImg.src=this.src;	
+					oImg.src=this.src;
+					oImg.flag=true;
 				}
 				oImg.src="o_loading.gif";
 			}

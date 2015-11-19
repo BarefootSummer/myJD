@@ -19,14 +19,14 @@
     Fn.prototype.getNum = function () {
         console.log(this.num);
     };
-    var f = new Fn(num);
-    console.log(f.num);
-    f.getNum();
-    Fn.prototype.getNum();
-    console.log(num);
-    var n = Fn(num);
-    console.log(n);
-    console.log(num);
+    var f = new Fn(num);//100 200
+    console.log(f.num);//200
+    f.getNum();//200
+    Fn.prototype.getNum();//300
+    console.log(num);//0
+    var n = Fn(num);//100 200
+    console.log(n);//100
+    console.log(num);//200
 </script>
 </body>
 </html>
