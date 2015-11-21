@@ -50,6 +50,8 @@ function fadeInOut(ele,target,duration){//target是指不透明度的终点值
 	//var timer=window.setInterval(step,interval);
 
 }
+fadeInOut();//0---1000，淡入
+fadeInOut();//700 ,第二次触发，淡出
 document.documentElement.onclick=function(){
 	if(getCss(ele,"opacity")<0.5){
 		fadeInOut(ele,1,2800);
@@ -62,6 +64,7 @@ document.documentElement.onclick=function(){
 //2、过界如果判断和处理（超过了边界或离边界还差一点）
 //3、动画积累的问题，一个元素同时被多次执行这个动画
 	//拿这个div的淡入来说(第一次执行fadeInOut)，它从0变化到了0.7，你又点了一下网页，又开始执行淡出了(第二次执行fadeInOut)，这样两个相反的效果作用在同一个元素上，就冲突了。
+	//怎么解决？：在第二个动画执行之前，把原来的动画清除掉
 	//在fadeInOut方法的开始部分加一个clearInterval(timer)能不能解决这个问题呢？
 	//淡入的时间是执行了一次fadeInOut,淡出的时候又执行了一次fadeInOut,这两次执行不是一个作用域，也就是第二次fadeInOut执行的时候，它是访问不到第一次执行的fadeInOut作用域里的timer变量的，所以这个清除动画积累的方式不起作用
 	//要想让清除积累起作用，应该在跨作用域的时候，也可以访问到这个定时器变量，
