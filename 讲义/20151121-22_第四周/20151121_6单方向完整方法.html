@@ -3,9 +3,13 @@
 <head>
 <meta charset="utf-8">
 <title>无标题文档</title>
+<style type="text/css">
+#div1{ width:100px; height:100px; background:red; position:absolute; left:150px; top:0;}
+</style>
 </head>
 
 <body>
+<div id="div1"></div>
 </body>
 </html>
 <script>
@@ -68,5 +72,7 @@ function animate(ele,attr,target,duration,callback){
 	}
 	ele.timer=window.setInterval(step,interval);
 }
-
+div1.onclick=function(){
+	animate(this,"opacity",0,1000);	
+}
 </script>
