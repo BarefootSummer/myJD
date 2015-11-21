@@ -1,4 +1,5 @@
 var utils = {
+
     toJSON: function (str) {
         return "JSON" in window ? JSON.parse(str) : eval("(" + str + ")");
     },

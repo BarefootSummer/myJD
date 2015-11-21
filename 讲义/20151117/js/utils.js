@@ -1,4 +1,4 @@
-/*
+                                                                                        /*
  * utils(v1.0): Which contains the common method of operating DOM
  * by Team on 2015/11/17
  */
@@ -394,7 +394,7 @@
         });
         return obj;
     };
-    
+
     //myExecAll：Capture all of the required content in a one-time capture
     regPro.myExecAll = function myExecAll(str) {
         var reg = !this.global ? eval(this.toString() + "g") : this;

@@ -33,7 +33,7 @@ var innerHTML=content.innerHTML;
 		content.innerHTML+=innerHTML;	
 	}
 	//window.setTimeout(arguments.callee(),20);
-	window.setTimeout(arguments.callee,20);
+	window.setTimeout(arguments.callee,0);
 })();
 
 
@@ -41,9 +41,10 @@ function outerFn(){
 	innerFn();	
 }
 function innerFn(){
-	console.log(arguments.callee.caller());//当前执行的这个函数的调用者；
+	console.log(arguments.callee.caller);//当前执行的这个函数的调用者；
 	//在这个函数的执行里，callee是innerFn,caller是outerFn
-		
+
+//	arguments.callee.caller()就死循环了
 }
 outerFn();//最后这两个方法是为了解释callee和caller这两个知识点
 </script>

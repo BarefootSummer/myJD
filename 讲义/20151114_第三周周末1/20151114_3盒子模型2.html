@@ -5,7 +5,7 @@
 <title>无标题文档</title>
 <style type="text/css">
 	#div1{ width:300px; height:300px; padding:20px; background:pink;
-	 overflow:auto; }
+	 overflow:auto; border:10px solid red}
 </style>
 
 </head>
@@ -24,10 +24,11 @@ scrollHeight,scrollWidth实际内容的。如果溢出，不带下padding
 </body>
 </html>
 <script>
- div1.offsetHeight;
- div1.scrollHeight;
- 
- div1.scrollTop;//它的最小值是0，最大值是div1.scrollHeight-div1.clientHeight;
+ alert(div1.clientHeight);
+ alert(div1.offsetHeight);
+ alert(div1.scrollHeight);
+
+ alert(div1.scrollTop);//它的最小值是0，最大值是div1.scrollHeight-div1.clientHeight;
  //div1.scrollTop是可读写的
  
  //如果没溢出，则scrollHeight和clientHeight的值相同

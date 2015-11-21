@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body, div {
+            margin: 0;
+            padding: 0;
+            font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+            font-size: 14px;
+            -webkit-user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #bg {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.1;
+            filter: alpha(opacity=10);
+        }
+
+        #box {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: #fff;
+            opacity: 0;
+            filter: alpha(opacity=0);
+
+            border-radius: 5px;
+            box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        #boxTop {
+            display: none;
+            padding: 0 10px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            background: #ffeedd;
+            opacity: 0;
+            filter: alpha(opacity=0);
+
+            border-radius: 5px 5px 0 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="bg"></div>
+<div id="box">
+    <div id="boxTop">欢迎登陆珠峰培训视频平台~~</div>
+</div>
+
+<script type="text/javascript" src="js/utils-1.0.min.js"></script>
+<script type="text/javascript">
+    //width: 420px; height: 520px; opacity: 1; margin的值一直要跟随我们的width和height进行变化
+    //指定具体的时间,然后实现多方向同时运动,最后运动到自己的目标值-->需要设置每一方向的step
+    //步长=(总距离/总时间)*多长时间执行一次(定时器中的时间因子)
+
+    var bg = document.getElementById("bg"), box = document.getElementById("box"), boxTop = document.getElementById("boxTop");
+
+    //duration:总时间 interval:时间因子 callBack:动画完成后的回调
+    var move = function (duration, interval, callBack) {
+        var _this = this;
+        var stepW = (420 / duration) * interval, stepH = (520 / duration) * interval, stepO = (1 / duration) * interval;
+        ~function _move() {
+            window.clearTimeout(_this.timer);
+            var curW = utils.css(_this, "width"), curH = utils.css(_this, "height"), curO = parseFloat(utils.css(_this, "opacity"));
+            if (curW + stepW >= 420) {
+                utils.setGroupCss(_this, {
+                    width: 420,
+                    height: 520,
+                    opacity: 1,
+                    marginLeft: -210,
+                    marginTop: -260
+                });
+                typeof callBack === "function" ? callBack.call(_this) : null;
+                return;
+            }
+            utils.setGroupCss(_this, {
+                width: curW + stepW,
+                height: curH + stepH,
+                opacity: curO + stepO,
+                marginLeft: -(curW + stepW) / 2,
+                marginTop: -(curH + stepH) / 2
+            });
+            _this.timer = window.setTimeout(_move, interval);
+        }();
+    };
+
+    document.body.onclick = function () {
+        bg.style.display = "block";
+        box.style.display = "block";
+
+        move.call(box, 2000, 10, function () {
+
+            boxTop.style.display = "block";
+            var count = 0;
+            boxTop.timer = window.setInterval(function () {
+                if (count + 0.01 >= 1) {
+                    utils.css(boxTop, "opacity", 1);
+                    window.clearInterval(boxTop.timer);
+                    return;
+                }
+                count += 0.01;
+                utils.css(boxTop, "opacity", count);
+            }, 10);
+
+        });
+    };
+</script>
+</body>
+</html>

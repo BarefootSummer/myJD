@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //toString -> 一个方法,一般是用来转换为字符串的
+    //null/undefined也是可以转换为字符串的,只不过我们浏览器给屏蔽掉了toString的使用
+    //但是出现了特例,关于对象调用toString,虽然也变为字符串了,但是并不是单纯的把之前的变为字符串,而是返回了自己的数据类型
+    //({name:'tom'}).toString() -> "[object Object]"
+    //->而这个toString是在Object.prototype上定义的
+    //->Object.prototype.toString 返回的是当前实例的数据类型
+    //->obj.toString() toString中的this->obj 返回的是obj的数据类型 ->toString这个方法执行的时候其实是返回的里面this的数据类型
+    //->只要让Object.prototype.toString执行,让里面的this变为谁,其实就是在检测谁的数据类型 -> "[object 当前值所属的类]"
+
+    console.log(Object.prototype.toString.call(12));//-> "[object Number]"
+    console.log(Object.prototype.toString.call("team"));//-> "[object String]"
+    console.log(Object.prototype.toString.call(true));//-> "[object Boolean]"
+    console.log(Object.prototype.toString.call(null));//-> "[object Null]"
+    console.log(Object.prototype.toString.call(undefined));//-> "[object Undefined]"
+    console.log(Object.prototype.toString.call({}));//-> "[object Object]"
+    console.log(Object.prototype.toString.call([]));//-> "[object Array]"
+    console.log(Object.prototype.toString.call(/^$/));//-> "[object RegExp]"
+    console.log(Object.prototype.toString.call(setTimeout));//-> "[object Function]"
+
+    //->利用toString检测数据类型,可以有效准确的判断任何值的数据类型,我们在编写类库、框架、插件的时候如果需要检测数据类型我们一般都是使用它来检测的
+    /*
+     * isType:基于Object.prototype.toString检测数据类型的
+     * @parameter
+     *   value:要检测的数据值
+     *   type:[string] 要检测数据值的所属类的字符串 例如:"Array"
+     * @return
+     *   [boolean] true->value是type类型的  false->value不是type类型的
+     */
+    //    var isType = function isType(value, type) {
+    //        var reg = new RegExp("^\\[object " + type + "\\]$", "i");//->在构造函数模式编写正则的时候,由于第一个传递的是一个字符串,所以需要转移的字符都需要用\\来转译 -> /^\[\]$/ 字面量方式中不需要使用\\,使用\即可
+    //        return reg.test(Object.prototype.toString.call(value));
+    //    };
+    //    var isAry = isType([], "array");
+    //    console.log(isAry);//->true
+
+
+    //分享一个全面的方法
+    ~function () {
+        var numObj = {
+            isNum: "Number",
+            isStr: "String",
+            isBoo: "Boolean",
+            isNul: "Null",
+            isUnd: "Undefined",
+            isObj: "Object",
+            isAry: "Array",
+            isFun: "Function",
+            isReg: "RegExp",
+            isDate: "Date"
+        }, isType = function () {
+            var outerArg = arguments[0];
+            return function () {
+                var innerArg = arguments[0], reg = new RegExp("^\\[object " + outerArg + "\\]$", "i");
+                return reg.test(Object.prototype.toString.call(innerArg));
+            }
+        };
+        for (var key in numObj) {
+            if (numObj.hasOwnProperty(key)) {
+                window[key] = isType(numObj[key]);
+            }
+        }
+    }();
+
+    console.log(window.isAry([]));
+    console.log(isNum(13));
+</script>
+</body>
+</html>
