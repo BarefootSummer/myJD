@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body, div {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1 {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background: #008000;
+            border-radius: 50%;
+        }
+
+        #btnLeft, #btnRight {
+            position: absolute;
+            top: 150px;
+            left: 100px;
+            width: 100px;
+            height: 30px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        #btnRight {
+            left: 220px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<input type="button" value="向左" id="btnLeft"/>
+<input type="button" value="向右" id="btnRight"/>
+
+<script charset="utf-8" type="text/javascript" src="js/utils-1.0.min.js"></script>
+<script type="text/javascript">
+    var oDiv = document.getElementById("div1");
+
+    function move(target) {
+        var _this = this;
+        window.clearTimeout(_this.timer);
+        ~function _move() {
+            window.clearTimeout(_this.timer);
+            var curL = utils.css(_this, "left");
+            if (curL < target) {
+                if (curL >= target) {
+                    return;
+                }
+                utils.css(_this, "left", curL + 5);
+            } else if (curL > target) {
+                if (curL <= target) {
+                    return;
+                }
+                utils.css(_this, "left", curL - 5);
+            } else {
+                return;
+            }
+            _this.timer = window.setTimeout(_move, 13);
+        }();
+    }
+
+    var btnRight = document.getElementById("btnRight"), btnLeft = document.getElementById("btnLeft");
+
+    btnRight.onclick = function () {
+        var tar = utils.win("clientWidth") - oDiv.offsetWidth;
+        move.call(oDiv, tar);
+    };
+
+    btnLeft.onclick = function () {
+        move.call(oDiv, 0);
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+1、如果使用的是window.setTimeout来实现轮询动画,我们的原理是基于递归思想的->每一次执行完成都重新的设置一个新的定时器来完成下一次的操作->这样的话我们的定时器就会重复的一直累加下去,影响页面的性能
+   解决办法:在每一次执行move方法的时候,第一步就是把之前创建的定时器清除掉
+   var timer = null;
+   function move() {
+       window.clearTimeout(timer);
+       <js code>
+       timer = window.setTimeout(move, 13);
+   }
+   move();
+
+2、我们每一次都把设置的定时器存储到全局变量timer中,但是过多的使用全局变量会造成相互的污染和冲突
+   解决办法:把timer设置为当前要操作元素的自定义属性,这样就避免了全局变量的冲突
+   隐形的作用:把timer设置为元素的自定属性,那么当前的元素只能存储一个timer,遇到一个元素多个动画的时候,可以快速的把之前运动的动画都结束,执行当前的这个动画即可
+   function move() {
+       window.clearTimeout(oDiv.timer);
+       <js code>
+       oDiv.timer = window.setTimeout(move, 13);
+   }
+   move();
+
+3、关于作用累积的问题->当move方法需要传递参数值的时候
+   function move(target) {
+      <js code>
+
+      oDiv.timer = window.setTimeout(move, 13);//->这样第二次执行的时候没有办法给move传递参数
+      oDiv.timer = window.setTimeout(move(target), 13);//->把move执行的返回结果undefined给了我们的定时器,当13ms后执行的是undefined,浏览器报错
+      oDiv.timer = window.setTimeout(function () {move(target);}, 13);//->可以实现,但是非常的消耗性能(见图"动画作用域问题.png")
+   }
+   move(1000);
+
+   解决办法：->只有move这个第一次执行的时候形成的私有作用域不销毁
+   如果我们的move需要传递参数,那么我们就在move中定义一个小的函数_move,每一次都把动画执行的代码放在_move中,设置定时器每一次执行的都是_move即可
+   function move(target) {
+       window.clearTimeout(oDiv.timer);//清除的是oDiv之前正在运行的动画
+
+       var _move=function(){
+            window.clearTimeout(oDiv.timer);//清除每一次_move执行产生的定时器的累积
+            <js code>
+            oDiv.timer=window.setTimeout(_move,13);
+       };
+       _move();
+   }
+   move(1000);
+
+4、边界判断的问题
+   按照之前我们的写法，会遇到下述的问题:步长是5,但是到边界发现,加5超了边界,不加还不能到边界,这样的话就会出现盒子在边界来回的抖动
+   var curL = utils.css(_this, "left");
+   if (curL < target) {
+       if (curL >= target) {
+           return;
+       }
+       utils.css(_this, "left", curL + 5);
+   } else if (curL > target) {
+       if (curL <= target) {
+           return;
+       }
+       utils.css(_this, "left", curL - 5);
+   }
+   解决办法:在边界判断的时候,让当前的值和步长相加做边界判断,如果到边界,我们在让元素的样式直接变为边界的值
+   var curL = utils.css(_this, "left");
+   if (curL < target) {
+      if (curL+5 >= target) {//1)加步长做临界判断
+          utils.css(_this, "left", target);//2)到临界后直接等于目标的值
+          return;
+      }
+      utils.css(_this, "left", curL + 5);
+   } else if (curL > target) {
+      if (curL-5 <= target) {
+          utils.css(_this, "left", target);
+          return;
+      }
+      utils.css(_this, "left", curL - 5);
+   }

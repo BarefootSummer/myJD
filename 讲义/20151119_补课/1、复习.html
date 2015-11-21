@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //原型的例子
+    //    function Fn(name) {
+    //        this.name = name;
+    //    }
+    //    Fn.prototype.name = "TEAM";
+    //    var f = new Fn;
+    //    //new Fn : 创建了一个Fn的类,并且创建了Fn这个类的一个实例；也和普通的函数执行一样,执行了Fn这个方法(形参赋值->预解释->代码执行->作用域的释放...)
+    //    //Fn执行的时候没有传递任何的值,new Fn("demo")这样才是给name传递了值,而这里没有传递值,name这个形参的默认值是undefined
+    //    console.log(f.name);//->先找实例私有的属性,私有的没有然后在通过__proto__找所属类原型上的公有属性 ->undefined
+    //    console.log(f.__proto__.name);//->跳过了查找私有的,直接查找公有的 -> "TEAM"
+
+    //    function Fn(name) {
+    //        if (name) {//name->undefined 转化为布尔是false ->条件不成立 22行就不执行了,也不能给f增加name的私有属性了,也就是f没有name这个私有的属性了
+    //            this.name = name;
+    //        }
+    //    }
+    //    Fn.prototype.name = "TEAM";
+    //    var f = new Fn;
+    //    console.log(f.name);//->先找私有的,私有的没有,所以找到的是公有的name ->"TEAM"
+    //    var f2 = new Fn("TOM");
+    //    console.log(f2.name);//->"TOM"
+
+
+    //    function Fn(name) {
+    //        var a = 12;
+    //        this.name = name;
+    //    }
+    //    Fn.prototype.name = "TEAM";
+    //    //类也是函数数据类型,和普通函数的区别在于
+    //    //普通函数 Fn();  类 new Fn();
+    //    //在原型上定义的属性和方法只有在类的执行中对于类的实例才起到了作用,如果是按照普通函数执行,上面写的东西没有什么作用了
+    //    Fn();//this->window  -> window.name=undefined;
+    //    console.log(name);//->undefined
+    //    //函数即使函数数据类型的也是对象数据类型的(var obj={name:""})
+    //    //作为一个普通的对象的时候,只有Fn.xxx=xxx的才是它的属性；而我的形参、私有的变量只有当做函数执行的时候才有的,不是作为对象的属性
+    //    console.log(Fn.name);//->"Fn" 这个是函数自带的name属性存储的是函数名
+    //    console.log(Fn.a);//->undefined
+
+
+    //Object.prototype上的方法 propertyIsEnumerable 判断当前的属性是否为可枚举的
+
+
+    //    Object.prototype.aa = function () {
+    //    };
+    //    var obj = {name: ""};
+    //    console.log(obj.propertyIsEnumerable("toString"));//->false 不可枚举的
+    //    console.log(obj.propertyIsEnumerable("aa"));//->false 不可枚举的
+    //    console.log(Object.prototype.propertyIsEnumerable("aa"));//->true 可枚举的
+    //    console.log(obj.propertyIsEnumerable("name"));//->true 是可枚举的
+
+    //不可枚举的一般都是浏览器内置的方法,在for in遍历的时候不会被访问到
+    //可枚举的一般都是我们自己手动添加的,在for in遍历的时候会被访问到
+    //    Array.prototype.sort = function () {
+    //        console.log("逗你玩!!")
+    //    };
+    //    [].sort();//->"逗你玩!!"
+
+
+    //我们自己在数组的原型上定义的方法在for in遍历的时候也会遍历到,而内置的方法是不能遍历到的 ->为了防止遍历公有的属性和方法，我们在每一次遍历的时候用hasOwnProperty来进行判断
+    //    for (var key in ary) {
+    //        if (ary.hasOwnProperty(key)) {
+    //            console.log(key);
+    //        }
+    //    }
+</script>
+</body>
+</html>
