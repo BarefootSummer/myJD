@@ -208,9 +208,6 @@ function animate(ele, oTarget, duration, effect, callback) {
 
     if (typeof effect == "number") {
         switch (effect) {
-            /*case 0:
-             break;
-             */
             case 1:
                 fnEffect = zhufengEffect.zfLinear;
                 break;
