@@ -67,7 +67,7 @@
 
 /*左右切换区域的样式*/
 .banner .bannerLeft, .banner .bannerRight {
-    display: block;
+    display: none;
     position: absolute;
     top: 50%;
     margin-top: -22px;
