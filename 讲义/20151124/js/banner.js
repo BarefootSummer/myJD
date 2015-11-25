@@ -384,9 +384,7 @@ var animate = function (curEle, oTarget, duration, effect, callBack) {
             window.clearInterval(bannerImg.autoTimer);
             setTip(this.index);
             step = this.index + 1;
-            animate(bannerImg, {left: -step * bannerW}, 500, 1, function () {
-                bannerImg.autoTimer = window.setInterval(autoMove, 3000);
-            });
+            animate(bannerImg, {left: -step * bannerW}, 500, 1);
         };
     }
 
@@ -401,8 +399,9 @@ var animate = function (curEle, oTarget, duration, effect, callBack) {
         bannerLeft.style.display = bannerRight.style.display = "none";
     };
 
-    bannerRight.onclick = function () {
+    var bannerRightFn = function () {
         window.clearInterval(bannerImg.autoTimer);
+        bannerRight.onclick = null;
         step++;
         if (step >= count) {
             setCss(bannerImg, "left", -1 * bannerW);
@@ -411,10 +410,12 @@ var animate = function (curEle, oTarget, duration, effect, callBack) {
         setTip(step - 1);
         animate(bannerImg, {left: -step * bannerW}, 500, 1, function () {
             bannerImg.autoTimer = window.setInterval(autoMove, 3000);
+            bannerRight.onclick = bannerRightFn;
         });
     };
-    bannerLeft.onclick = function () {
+    var bannerLeftFn = function () {
         window.clearInterval(bannerImg.autoTimer);
+        bannerLeft.onclick = null;
         step--;
         if (step < 0) {
             setCss(bannerImg, "left", -(count - 2) * bannerW);
@@ -423,6 +424,10 @@ var animate = function (curEle, oTarget, duration, effect, callBack) {
         setTip(step - 1);
         animate(bannerImg, {left: -step * bannerW}, 500, 1, function () {
             bannerImg.autoTimer = window.setInterval(autoMove, 3000);
+            bannerLeft.onclick = bannerLeftFn;
         });
     };
+
+    bannerRight.onclick = bannerRightFn;
+    bannerLeft.onclick = bannerLeftFn;
 }();
