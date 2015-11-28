@@ -35,11 +35,12 @@ li{
 	padding:2px;
 	display:none;
 	color:#fff;
+	
 }
 </style>
 <script type="text/javascript">
 //<![CDATA[
-$(function(){
+/*$(function(){
 	var x = 10;
 	var y = 20;
 	$("a.tooltip").mouseover(function(e){
@@ -63,7 +64,7 @@ $(function(){
 				"left":  (e.pageX+x)  + "px"
 			});
 	});
-})
+})*/
 //]]>
 </script>
 
@@ -84,10 +85,22 @@ $(function(){
 
 <h3>无效果：</h3>
 <ul>
-		<li><a href="images/apple_1_bigger.jpg" title="苹果 iPod"><img src="images/apple_1.jpg" alt="苹果 iPod" /></a></li>
+		<li ><a  href="images/apple_1_bigger.jpg" title="苹果 iPod"><img  src="images/apple_1.jpg" alt="苹果 iPod" /></a></li>
 		<li><a href="images/apple_2_bigger.jpg" title="苹果 iPod nano"><img src="images/apple_2.jpg" alt="苹果 iPod nano"/></a></li>
 		<li><a href="images/apple_3_bigger.jpg" title="苹果 iPhone"><img src="images/apple_3.jpg" alt="苹果 iPhone"/></a></li>
 		<li><a href="images/apple_4_bigger.jpg" title="苹果 Mac"><img src="images/apple_4.jpg" alt="苹果 Mac"/></a></li>
 	</ul>
 </body>
 </html>
+<script>
+$("a.tooltip").mouseover(function(e){
+	var src=this.href;
+	$("<div id='tooltip'><img src='"+src+"'></div>").appendTo(document.body).css({left:e.pageX,top:e.pageY}).show(600);
+	
+}).mousemove(function(e) {
+    $("#tooltip").css({left:e.pageX,top:e.pageY});
+}).mouseout(function(e) {
+    $("#tooltip").remove();
+});
+
+</script>
